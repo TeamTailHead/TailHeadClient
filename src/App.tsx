@@ -1,19 +1,23 @@
-import { useState } from "react";
+import { ReactElement } from "react";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
+import ScreenSelector from "./components/common/ScreenSelector";
+import JoinScreen from "./components/join/JoinScreen";
+import { ScreenState, screenStateAtom } from "./states/screen";
 import GlobalStyle from "./styles/GlobalStyle";
 
 const App: React.FC = () => {
-  const [count, setCount] = useState(0);
+  const screenState = useRecoilValue(screenStateAtom);
 
-  const handleCount = () => {
-    setCount((count) => count + 1);
-  };
+  const screens: Array<{ key: ScreenState; component: ReactElement }> = [
+    { key: "join", component: <JoinScreen /> },
+  ];
 
   return (
     <StyledApp>
       <GlobalStyle />
-      <CounterButton onClick={handleCount}>Counter! {count}</CounterButton>
+      <ScreenSelector selectedKey={screenState} screens={screens} />
     </StyledApp>
   );
 };
@@ -26,8 +30,6 @@ const StyledApp = styled.div`
   max-height: 100vh;
   overflow: hidden;
 
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
 `;
-
-const CounterButton = styled.button``;

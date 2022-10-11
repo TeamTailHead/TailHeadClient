@@ -15,6 +15,8 @@
     "node": "^14.18.0 || >=16.0.0"
   },
   "dependencies": {
+    "@tailhead/communicator": "^0.0.1",
+    "recoil": "^0.7.5",
     "styled-components": "^5.3.5",
     "styled-reset": "^4.4.2"
   },
