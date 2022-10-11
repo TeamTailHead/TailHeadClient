@@ -15,7 +15,8 @@
     "node": "^14.18.0 || >=16.0.0"
   },
   "dependencies": {
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "styled-reset": "^4.4.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
