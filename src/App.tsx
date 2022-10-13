@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import { ReactElement } from "react";
 import { useRecoilValue } from "recoil";
-import styled from "styled-components";
 
 import ScreenSelector from "./components/common/ScreenSelector";
 import JoinScreen from "./components/join/JoinScreen";

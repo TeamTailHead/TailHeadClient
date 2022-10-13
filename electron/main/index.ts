@@ -2,6 +2,8 @@ import { app, BrowserWindow, ipcMain, shell } from "electron";
 import { release } from "os";
 import { join } from "path";
 
+import { createMenu } from "./menu";
+
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith("6.1")) app.disableHardwareAcceleration();
 
@@ -43,23 +45,21 @@ async function createWindow() {
     // win.webContents.openDevTools()
   }
 
-  // Test actively push message to the Electron-Renderer
-  win.webContents.on("did-finish-load", () => {
-    win?.webContents.send("main-process-message", new Date().toLocaleString());
-  });
-
   // Make all links open with the browser, not with the application
   win.webContents.setWindowOpenHandler(({ url }) => {
     if (url.startsWith("https:")) shell.openExternal(url);
     return { action: "deny" };
   });
+
+  createMenu(win);
 }
 
 app.whenReady().then(createWindow);
 
 app.on("window-all-closed", () => {
   win = null;
-  if (process.platform !== "darwin") app.quit();
+  app.quit();
+  // if (process.platform !== "darwin") app.quit();
 });
 
 app.on("second-instance", () => {
