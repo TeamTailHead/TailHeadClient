@@ -1,7 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { FC } from "react";
 
-import Panel from "./Panel";
+import DebugPanel from "./DebugPanel";
 
 const Debug: FC = () => {
   if (!import.meta.env.DEV) {
@@ -10,7 +10,7 @@ const Debug: FC = () => {
 
   return (
     <ChakraProvider>
-      <Panel />
+      <DebugPanel />
     </ChakraProvider>
   );
 };

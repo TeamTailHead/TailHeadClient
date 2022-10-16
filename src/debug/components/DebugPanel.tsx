@@ -5,12 +5,17 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
   useDisclosure,
 } from "@chakra-ui/react";
 import { ipcRenderer } from "electron";
 import { FC, useEffect } from "react";
 
-const Panel: FC = () => {
+const DebugPanel: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
@@ -30,10 +35,19 @@ const Panel: FC = () => {
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader borderBottomWidth="1px">디버그 패널</DrawerHeader>
-        <DrawerBody />
+        <DrawerBody padding={0}>
+          <Tabs>
+            <TabList>
+              <Tab>메시지 전송</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>asdf</TabPanel>
+            </TabPanels>
+          </Tabs>
+        </DrawerBody>
       </DrawerContent>
     </Drawer>
   );
 };
 
-export default Panel;
+export default DebugPanel;
