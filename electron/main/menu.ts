@@ -9,6 +9,7 @@ export function createMenu(win: BrowserWindow) {
   const template: MenuItemConstructorOptions[] = [
     { role: "appMenu" },
     { label: "파일", role: "fileMenu" },
+    { label: "편집", role: "editMenu" },
     { label: "보기", role: "viewMenu" },
     {
       label: "창",
