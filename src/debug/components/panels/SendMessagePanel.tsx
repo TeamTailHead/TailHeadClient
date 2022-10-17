@@ -8,12 +8,12 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { ServerMessage } from "@tailhead/communicator/dist/message";
-import { FC, ReactNode } from "react";
+import { FC, Fragment, ReactNode } from "react";
 
 import { useCommunicatorDebugger } from "@/communicator";
 
-import PlayerChatForm from "../sendForms/PlayerChatForm";
-import SystemChatForm from "../sendForms/SystemChatForm";
+import JSONForm from "../sendForms/JSONForm";
+import { serverMessageValidators } from "../serverMessage";
 
 const SendMessagePanel: FC = () => {
   const debug = useCommunicatorDebugger();
@@ -28,14 +28,19 @@ const SendMessagePanel: FC = () => {
     <>
       <Accordion defaultIndex={[]} allowMultiple>
         <Divider />
-        <SendArbitaryItem title="playerChat">
-          <PlayerChatForm onSubmit={submitHandler("playerChat")} />
-        </SendArbitaryItem>
-        <Divider />
-        <SendArbitaryItem title="systemChat">
-          <SystemChatForm onSubmit={submitHandler("systemChat")} />
-        </SendArbitaryItem>
-        <Divider />
+        {serverMessageValidators.map(({ key, validator, defaultValue }) => (
+          <Fragment key={key}>
+            <SendArbitaryItem title={key}>
+              <JSONForm
+                formKey={key}
+                validator={validator}
+                defaultValue={defaultValue}
+                onSubmit={submitHandler(key)}
+              />
+            </SendArbitaryItem>
+            <Divider />
+          </Fragment>
+        ))}
       </Accordion>
     </>
   );
