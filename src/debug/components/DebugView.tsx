@@ -17,6 +17,7 @@ import { FC, useEffect } from "react";
 
 import ReceivedMessagePanel from "./panels/ReceivedMessagePanel";
 import SendedMessagePanel from "./panels/SendedMessagePanel";
+import SendMessagePanel from "./panels/SendMessagePanel";
 
 const DebugView: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,7 +47,9 @@ const DebugView: FC = () => {
               <Tab>발신 내역</Tab>
             </TabList>
             <TabPanels>
-              <TabPanel>전송</TabPanel>
+              <TabPanel>
+                <SendMessagePanel />
+              </TabPanel>
               <TabPanel>
                 <ReceivedMessagePanel />
               </TabPanel>

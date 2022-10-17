@@ -9,6 +9,7 @@ import SocketProvider from "./communicator/context/socket";
 import { createDebugSocket } from "./communicator/socket/debugSocket";
 import { createNodeSocket } from "./communicator/socket/nodeSocket";
 import { parseConnectionURL } from "./communicator/util";
+import { CommunicatorWorker } from "./components/worker";
 import { SOCKET_SERVER_URL, USE_DEBUG_SOCKET } from "./const";
 import { Debug } from "./debug";
 
@@ -39,6 +40,7 @@ ReactDOM.createRoot(root).render(
         <CommunicatorProvider>
           <ConnectionProvider connection={connection}>
             <App />
+            <CommunicatorWorker />
             <Debug />
           </ConnectionProvider>
         </CommunicatorProvider>
