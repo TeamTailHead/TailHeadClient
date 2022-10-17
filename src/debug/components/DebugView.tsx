@@ -15,7 +15,10 @@ import {
 import { ipcRenderer } from "electron";
 import { FC, useEffect } from "react";
 
-const DebugPanel: FC = () => {
+import ReceivedMessagePanel from "./panels/ReceivedMessagePanel";
+import SendedMessagePanel from "./panels/SendedMessagePanel";
+
+const DebugView: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
@@ -39,9 +42,17 @@ const DebugPanel: FC = () => {
           <Tabs>
             <TabList>
               <Tab>메시지 전송</Tab>
+              <Tab>수신 내역</Tab>
+              <Tab>발신 내역</Tab>
             </TabList>
             <TabPanels>
-              <TabPanel>asdf</TabPanel>
+              <TabPanel>전송</TabPanel>
+              <TabPanel>
+                <ReceivedMessagePanel />
+              </TabPanel>
+              <TabPanel>
+                <SendedMessagePanel />
+              </TabPanel>
             </TabPanels>
           </Tabs>
         </DrawerBody>
@@ -50,4 +61,4 @@ const DebugPanel: FC = () => {
   );
 };
 
-export default DebugPanel;
+export default DebugView;

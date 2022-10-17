@@ -1,7 +1,11 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { useSetRecoilState } from "recoil";
 
-import DebugPanel from "./DebugPanel";
+import { useCommunicatorDebugger } from "@/communicator";
+
+import { sendedMessageAtom } from "../states";
+import DebugView from "./DebugView";
 
 const Debug: FC = () => {
   if (!import.meta.env.DEV) {
@@ -10,9 +14,26 @@ const Debug: FC = () => {
 
   return (
     <ChakraProvider>
-      <DebugPanel />
+      <DebugView />
+      <DebugWorker />
     </ChakraProvider>
   );
 };
 
 export default Debug;
+
+const DebugWorker = () => {
+  const debug = useCommunicatorDebugger();
+  const setSendedMessage = useSetRecoilState(sendedMessageAtom);
+
+  useEffect(() => {
+    debug.onSend((type, data) => {
+      setSendedMessage((prev) => [
+        { type, data, timestamp: new Date() },
+        ...prev,
+      ]);
+    });
+  }, []);
+
+  return null;
+};
