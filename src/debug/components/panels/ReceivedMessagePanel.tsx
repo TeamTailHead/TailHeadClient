@@ -6,11 +6,11 @@ import { useRecoilValue } from "recoil";
 import { receivedMessageAtom } from "../../states";
 
 const ReceivedMessagePanel: FC = () => {
-  const sendedMessage = useRecoilValue(receivedMessageAtom);
+  const receivedMessage = useRecoilValue(receivedMessageAtom);
 
   return (
     <Container>
-      {sendedMessage.map((message, idx) => (
+      {receivedMessage.map((message, idx) => (
         <Box key={idx} p={3} shadow="md" borderWidth="1px">
           <Heading fontSize="lg">{message.type}</Heading>
           <pre>{JSON.stringify(message.data, null, 2)}</pre>

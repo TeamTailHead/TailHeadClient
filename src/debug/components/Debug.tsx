@@ -4,7 +4,7 @@ import { useSetRecoilState } from "recoil";
 
 import { useCommunicatorDebugger } from "@/communicator";
 
-import { sendedMessageAtom } from "../states";
+import { receivedMessageAtom, sendedMessageAtom } from "../states";
 import DebugView from "./DebugView";
 
 const Debug: FC = () => {
@@ -25,10 +25,18 @@ export default Debug;
 const DebugWorker = () => {
   const debug = useCommunicatorDebugger();
   const setSendedMessage = useSetRecoilState(sendedMessageAtom);
+  const setReceivedMessage = useSetRecoilState(receivedMessageAtom);
 
   useEffect(() => {
     debug.onSend((type, data) => {
       setSendedMessage((prev) => [
+        { type, data, timestamp: new Date() },
+        ...prev,
+      ]);
+    });
+
+    debug.onReceive((type, data) => {
+      setReceivedMessage((prev) => [
         { type, data, timestamp: new Date() },
         ...prev,
       ]);

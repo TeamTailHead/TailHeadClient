@@ -17,6 +17,7 @@ interface CommunicatorContextValue {
       data: ServerMessage[K]
     ): void;
     onSend(handler: (type: string, data: unknown) => void): void;
+    onReceive(handler: (type: string, data: unknown) => void): void;
   };
 }
 
@@ -36,19 +37,27 @@ export const CommunicatorProvider: FC<CommunicatorProviderProps> = ({
   const context = useMemo<CommunicatorContextValue>(() => {
     const communicator = new StringClientCommunicator(socket);
 
-    let onSend: ClientCommunicator["send"] = () => {
+    let onDebugSend: ClientCommunicator["send"] = () => {
+      //
+    };
+    let onDebugReceive = (_type: string, _data: unknown) => {
       //
     };
     const receiverMap = new Map<string, ServerMessageHandler<unknown>>();
 
     const proxied: ClientCommunicator = {
       send(type, data) {
-        onSend(type, data);
+        onDebugSend(type, data);
         return communicator.send(type, data);
       },
       onReceive(type, fn) {
-        receiverMap.set(type, fn as ServerMessageHandler<unknown>);
-        return communicator.onReceive(type, fn);
+        const proxiedFn: typeof fn = (data) => {
+          onDebugReceive(type, data);
+          return fn(data);
+        };
+
+        receiverMap.set(type, proxiedFn as ServerMessageHandler<unknown>);
+        return communicator.onReceive(type, proxiedFn);
       },
     };
 
@@ -59,8 +68,11 @@ export const CommunicatorProvider: FC<CommunicatorProviderProps> = ({
           const handler = receiverMap.get(type);
           handler?.(data);
         },
-        onSend(handler: typeof onSend) {
-          onSend = handler;
+        onSend(handler: typeof onDebugSend) {
+          onDebugSend = handler;
+        },
+        onReceive(handler) {
+          onDebugReceive = handler;
         },
       },
     };
