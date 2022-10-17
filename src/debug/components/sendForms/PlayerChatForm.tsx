@@ -1,7 +1,9 @@
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { ServerMessage } from "@tailhead/communicator/dist/message";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
+
+import SubmitButton from "./common/SubmitButton";
 
 type PlayerChat = ServerMessage["playerChat"];
 
@@ -42,9 +44,7 @@ const PlayerChatForm: FC<PlayerChatFormProps> = ({ onSubmit }) => {
           {...register("content")}
         />
       </FormControl>
-      <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
-        전송
-      </Button>
+      <SubmitButton isLoading={isSubmitting} />
     </form>
   );
 };

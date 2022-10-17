@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Divider,
 } from "@chakra-ui/react";
 import { ServerMessage } from "@tailhead/communicator/dist/message";
 import { FC, ReactNode } from "react";
@@ -12,6 +13,7 @@ import { FC, ReactNode } from "react";
 import { useCommunicatorDebugger } from "@/communicator";
 
 import PlayerChatForm from "../sendForms/PlayerChatForm";
+import SystemChatForm from "../sendForms/SystemChatForm";
 
 const SendMessagePanel: FC = () => {
   const debug = useCommunicatorDebugger();
@@ -25,9 +27,15 @@ const SendMessagePanel: FC = () => {
   return (
     <>
       <Accordion defaultIndex={[]} allowMultiple>
+        <Divider />
         <SendArbitaryItem title="playerChat">
           <PlayerChatForm onSubmit={submitHandler("playerChat")} />
         </SendArbitaryItem>
+        <Divider />
+        <SendArbitaryItem title="systemChat">
+          <SystemChatForm onSubmit={submitHandler("systemChat")} />
+        </SendArbitaryItem>
+        <Divider />
       </Accordion>
     </>
   );
