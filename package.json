@@ -26,6 +26,7 @@
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "@vitejs/plugin-react": "^2.0.1",
+    "date-fns": "^2.29.3",
     "electron": "^20.0.2",
     "electron-builder": "^23.3.3",
     "emotion-reset": "^3.0.1",

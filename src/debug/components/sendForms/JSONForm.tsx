@@ -90,7 +90,7 @@ function parseJSON<T>(
   json: string
 ): ParseJSONResult<T> {
   try {
-    const obj = JSON.parse(json) as unknown;
+    const obj = JSON.parse(json, jsonDateResolver) as unknown;
     const parsed = validator.parse(obj);
     return { success: true, data: parsed };
   } catch (err) {
@@ -104,4 +104,13 @@ function parseJSON<T>(
   }
 }
 
-parseJSON(z.number(), "123");
+const jsonDateResolver = (_key: string, value: unknown) => {
+  if (typeof value === "string" && value.match(/.+T.+Z/)) {
+    const timestamp = Date.parse(value);
+
+    if (!isNaN(timestamp)) {
+      return new Date(timestamp);
+    }
+  }
+  return value;
+};
