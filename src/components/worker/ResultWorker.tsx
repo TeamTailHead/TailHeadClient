@@ -19,8 +19,8 @@ const ResultWorker: FC = () => {
           score: player.score,
         }))
       );
+      setScreenState("result");
     });
-    setScreenState("result");
   }, []);
 
   return null;
