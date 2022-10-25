@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   parser: "@typescript-eslint/parser",
   extends: ["eslint:recommended", "prettier"],
-  plugins: ["simple-import-sort"],
+  plugins: ["simple-import-sort", "react-hooks", "react"],
   env: {
     node: true,
     es6: true,
@@ -29,6 +29,8 @@ module.exports = {
     "import/first": "error",
     "import/newline-after-import": "error",
     "eol-last": ["error", "always"],
+    "react-hooks/rules-of-hooks": "error",
+    "react/jsx-key": "error",
   },
   overrides: [
     {
