@@ -2,18 +2,18 @@ import { FC, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 
 import { useSetMessageHandler } from "@/communicator/context/communicator";
-import { joinStatusAtom } from "@/states/join";
+import { joinErrorAtom } from "@/states/join";
 import { screenStateAtom } from "@/states/screen";
 
 const JoinErrorWorker: FC = () => {
   const setHandler = useSetMessageHandler();
-  const setJoinStatus = useSetRecoilState(joinStatusAtom);
+  const setJoinError = useSetRecoilState(joinErrorAtom);
   const setScreenState = useSetRecoilState(screenStateAtom);
 
   useEffect(() => {
     setHandler("joinError", ({ message }) => {
-      setJoinStatus({
-        status: "error",
+      setJoinError({
+        isError: true,
         message,
       });
       setScreenState("join");
