@@ -20,7 +20,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@hookform/resolvers": "^2.9.9",
-    "@tailhead/communicator": "^0.0.1",
+    "@tailhead/communicator": "^0.0.3",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
