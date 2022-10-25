@@ -1,18 +1,22 @@
 import styled from "@emotion/styled";
 import { FC, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 import { useSendMessage } from "@/communicator";
-import { joinErrorAtom } from "@/states/join";
+import { joinStatusAtom } from "@/states/join";
 
 import Screen from "../common/Screen";
 
 const JoinScreen: FC = () => {
   const send = useSendMessage();
+  const [joinStatus, setJoinStatus] = useRecoilState(joinStatusAtom);
+
   const [nickname, setNickname] = useState("");
-  const joinError = useRecoilValue(joinErrorAtom);
 
   const handleJoin = () => {
+    setJoinStatus({
+      state: "loading",
+    });
     send("join", {
       nickname,
     });
@@ -28,11 +32,16 @@ const JoinScreen: FC = () => {
             onChange={(e) => setNickname(e.target.value)}
             placeholder="닉네임 입력"
           />
-          <JoinButton onClick={handleJoin}>시작하기</JoinButton>
+          <JoinButton
+            onClick={handleJoin}
+            disabled={joinStatus.state === "loading"}
+          >
+            시작하기
+          </JoinButton>
         </NicknameForm>
-        {joinError.isError ? (
+        {joinStatus.state === "error" ? (
           <JoinErrorMessage>
-            접속에 실패했습니다: {joinError.message}
+            접속에 실패했습니다: {joinStatus.message}
           </JoinErrorMessage>
         ) : null}
       </CenterBox>
