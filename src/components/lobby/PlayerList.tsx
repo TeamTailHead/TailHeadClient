@@ -14,6 +14,7 @@ const PlayerList: FC = () => {
     <StyledPlayerList>
       {players.map((player) => (
         <PlayerListItem
+          key={player.id}
           nickname={player.nickname}
           isAdmin={player.id === adminId}
         />
