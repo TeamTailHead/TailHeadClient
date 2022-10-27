@@ -1,12 +1,20 @@
 import { atom } from "recoil";
 
-type JoinError =
+type JoinStatus =
   | {
-      isError: false;
+      state: "idle";
     }
-  | { isError: true; message: string };
+  | {
+      state: "loading";
+    }
+  | {
+      state: "error";
+      message: string;
+    };
 
-export const joinErrorAtom = atom<JoinError>({
-  key: "joinError",
-  default: { isError: false },
+export const joinStatusAtom = atom<JoinStatus>({
+  key: "joinStatus",
+  default: {
+    state: "idle",
+  },
 });
