@@ -15,11 +15,9 @@ export const currentPlayerIdAtom = atom<string>({
   default: "",
 });
 
-export const historyWordAtom = atom({
+export const historyWordAtom = atom<string[]>({
   key: "historyWord",
-  default: {
-    historyword: [],
-  },
+  default: [],
 });
 
 export const lastWordAtom = atom<string>({
