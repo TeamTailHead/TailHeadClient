@@ -8,6 +8,7 @@ import {
   gamePlayersAtom,
   lastWordAtom,
   turnSequence,
+  wordHistoryAtom,
 } from "@/states/game";
 import { screenStateAtom } from "@/states/screen";
 
@@ -19,15 +20,24 @@ const GameInfoWorker: FC = () => {
   const setLastWord = useSetRecoilState(lastWordAtom);
   const setDeadLine = useSetRecoilState(deadlineAtom);
   const setTurnSequence = useSetRecoilState(turnSequence);
+  const setHistoryWord = useSetRecoilState(wordHistoryAtom);
 
   useEffect(() => {
     setHandler(
       "gameTurnInfo",
-      ({ currentPlayerId, deadline, lastWord, players, turnSequence }) => {
+      ({
+        currentPlayerId,
+        deadline,
+        lastWord,
+        players,
+        turnSequence,
+        wordHistoryAtom,
+      }) => {
         setCurrentPlayerId(currentPlayerId);
         setLastWord(lastWord);
         setDeadLine(deadline);
         setTurnSequence(turnSequence);
+        setHistoryWord(wordHistoryAtom);
         setGamePlayers(
           players.map((player) => ({
             id: player.id,
