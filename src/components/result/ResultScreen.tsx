@@ -17,8 +17,9 @@ const ResultScreen: FC = () => {
   return (
     <Screen>
       ResultScreen
-      {sorted.map((user) => (
+      {sorted.map((user, idx) => (
         <div key={user.id}>
+          <span>{idx + 1}등 </span>
           <span>{user.nickname}님 </span>
           <span>{user.score}점</span>
         </div>
