@@ -7,7 +7,7 @@ import {
   deadlineAtom,
   gamePlayersAtom,
   lastWordAtom,
-  turnSequence,
+  turnSequenceAtom,
 } from "@/states/game";
 import { screenStateAtom } from "@/states/screen";
 
@@ -18,7 +18,7 @@ const GameInfoWorker: FC = () => {
   const setCurrentPlayerId = useSetRecoilState(currentPlayerIdAtom);
   const setLastWord = useSetRecoilState(lastWordAtom);
   const setDeadLine = useSetRecoilState(deadlineAtom);
-  const setTurnSequence = useSetRecoilState(turnSequence);
+  const setTurnSequence = useSetRecoilState(turnSequenceAtom);
 
   useEffect(() => {
     setHandler(
@@ -32,6 +32,7 @@ const GameInfoWorker: FC = () => {
           players.map((player) => ({
             id: player.id,
             nickname: player.nickname,
+            score: player.score,
           }))
         );
         setScreenState("game");

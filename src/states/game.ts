@@ -3,6 +3,7 @@ import { atom } from "recoil";
 export interface GamePlayer {
   id: string;
   nickname: string;
+  score: number;
 }
 
 export const gamePlayersAtom = atom<GamePlayer[]>({
@@ -30,7 +31,7 @@ export const deadlineAtom = atom<Date>({
   default: new Date(),
 });
 
-export const turnSequence = atom<number>({
+export const turnSequenceAtom = atom<number>({
   key: "turnSequnece",
   default: 0,
 });
