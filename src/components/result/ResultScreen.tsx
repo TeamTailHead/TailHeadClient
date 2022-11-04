@@ -18,7 +18,7 @@ const ResultScreen: FC = () => {
 
   return (
     <StyledResultScreen>
-      ResultScreen
+      <ResultScreenTitle>순위표</ResultScreenTitle>
       {sorted.map((user, idx) => (
         <ResultPlayer
           key={user.id}
@@ -36,4 +36,13 @@ export default ResultScreen;
 
 const StyledResultScreen = styled(Screen)`
   text-align: center;
+  background-color: #e5e5e5;
+`;
+
+const ResultScreenTitle = styled.div`
+  font-size: 300%;
+  margin: 0 auto 5%;
+  width: 200px;
+  background: #b3b3b3;
+  border-radius: 24px;
 `;
