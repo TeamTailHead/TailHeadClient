@@ -22,16 +22,18 @@ const ResultScreen: FC = () => {
   return (
     <StyledResultScreen>
       <ResultScreenTitle>순위표</ResultScreenTitle>
-      {sorted.map((user, idx) => (
-        <ResultPlayer
-          key={user.id}
-          ranking={idx + 1}
-          nickname={user.nickname}
-          score={user.score}
-          isFirst={idx === 0}
-          isMe={currentPlayerId === user.id}
-        />
-      ))}
+      <ResultScreenMain>
+        {sorted.map((user, idx) => (
+          <ResultPlayer
+            key={user.id}
+            ranking={idx + 1}
+            nickname={user.nickname}
+            score={user.score}
+            isFirst={idx === 0}
+            isMe={currentPlayerId === user.id}
+          />
+        ))}
+      </ResultScreenMain>
     </StyledResultScreen>
   );
 };
@@ -48,5 +50,12 @@ const ResultScreenTitle = styled.div`
   margin: 0 auto 5%;
   width: 200px;
   background: #b3b3b3;
+  border-radius: 24px;
+`;
+
+const ResultScreenMain = styled.div`
+  background-color: #b3b3b3;
+  margin-left: 20%;
+  margin-right: 20%;
   border-radius: 24px;
 `;

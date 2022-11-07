@@ -29,11 +29,9 @@ export default ResultPlayer;
 
 const StyledResultPlyaer = styled.div<{ isMe: boolean }>`
   display: flex;
-  background-color: #b3b3b3;
   flex-grow: 1;
-  margin-left: 20%;
-  margin-right: 20%;
-  background-color: ${(props) => (props.isMe === true ? "orange" : "#b3b3b3")};
+  background-color: ${(props) => (props.isMe === true ? "orange" : "none")};
+  border-radius: inherit;
 `;
 
 const Ranking = styled.div<{ isFirst: boolean }>`
