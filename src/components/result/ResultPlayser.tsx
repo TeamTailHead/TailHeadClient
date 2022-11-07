@@ -16,19 +16,9 @@ const ResultPlayer: FC<ResultPlayerProps> = ({
 }) => {
   return (
     <StyledResultPlyaer>
-      {isFirst ? (
-        <>
-          <RankingFirst>{ranking}등</RankingFirst>
-          <NameFirst>{name}</NameFirst>
-          <ScoreFirst>{score}점</ScoreFirst>
-        </>
-      ) : (
-        <>
-          <Ranking>{ranking}등</Ranking>
-          <Name>{name}</Name>
-          <Score>{score}점</Score>
-        </>
-      )}
+      <Ranking isFirst={isFirst}>{ranking}등</Ranking>
+      <Name isFirst={isFirst}>{name}</Name>
+      <Score isFirst={isFirst}>{score}점</Score>
     </StyledResultPlyaer>
   );
 };
@@ -43,44 +33,26 @@ const StyledResultPlyaer = styled.div`
   margin-right: 20%;
 `;
 
-const Ranking = styled.div`
+const Ranking = styled.div<{ isFirst: boolean }>`
   margin-top: 2%;
   margin-bottom: 2%;
   margin-right: auto;
   margin-left: 2%;
+  color: ${(props) => (props.isFirst === true ? "yellow" : "black")};
+  font-weight: ${(props) => (props.isFirst === true ? "bold" : "normal")};
 `;
 
-const Name = styled.div`
+const Name = styled.div<{ isFirst: boolean }>`
   margin: 2% auto;
+  color: ${(props) => (props.isFirst === true ? "yellow" : "black")};
+  font-weight: ${(props) => (props.isFirst === true ? "bold" : "normal")};
 `;
 
-const Score = styled.div`
+const Score = styled.div<{ isFirst: boolean }>`
   margin-top: 2%;
   margin-bottom: 2%;
   margin-left: auto;
   margin-right: 2%;
-`;
-
-const RankingFirst = styled.div`
-  margin-top: 2%;
-  margin-bottom: 2%;
-  margin-right: auto;
-  margin-left: 2%;
-  color: yellow;
-  font-weight: bold;
-`;
-
-const NameFirst = styled.div`
-  margin: 2% auto;
-  color: yellow;
-  font-weight: bold;
-`;
-
-const ScoreFirst = styled.div`
-  margin-top: 2%;
-  margin-bottom: 2%;
-  margin-left: auto;
-  margin-right: 2%;
-  color: yellow;
-  font-weight: bold;
+  color: ${(props) => (props.isFirst === true ? "yellow" : "black")};
+  font-weight: ${(props) => (props.isFirst === true ? "bold" : "normal")};
 `;

@@ -92,6 +92,31 @@ export const serverMessageValidators = [
           nickname: "B",
           score: 300,
         },
+        {
+          id: "CCC",
+          nickname: "씨씨씨씨씨씨씨씨씨씨",
+          score: 999,
+        },
+        {
+          id: "DDD",
+          nickname: "가나다라마바사아자차",
+          score: 888,
+        },
+        {
+          id: "EEE",
+          nickname: "닉네임은10글자까지",
+          score: 567,
+        },
+        {
+          id: "FFF",
+          nickname: "펩시제로가더맛있음!",
+          score: 345,
+        },
+        {
+          id: "GGG",
+          nickname: "지지지지베이베베이베",
+          score: 666,
+        },
       ],
     }
   ),
