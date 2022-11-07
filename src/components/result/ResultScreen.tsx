@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { FC } from "react";
 import { useRecoilValue } from "recoil";
 
+import { currentPlayerAtom } from "@/states/currentPlayer";
 import { resultAtom } from "@/states/result";
 import { GameResult } from "@/states/result";
 
@@ -10,8 +11,10 @@ import ResultPlayer from "./ResultPlayser";
 
 const ResultScreen: FC = () => {
   const result = useRecoilValue(resultAtom);
+  const currentPlayer = useRecoilValue(currentPlayerAtom);
 
   const sorted = [...result];
+  const currentPlayerId = currentPlayer.id;
   sorted.sort((a: GameResult, b: GameResult) => {
     return b.score - a.score;
   });
@@ -26,6 +29,7 @@ const ResultScreen: FC = () => {
           nickname={user.nickname}
           score={user.score}
           isFirst={idx === 0}
+          isMe={currentPlayerId === user.id}
         />
       ))}
     </StyledResultScreen>

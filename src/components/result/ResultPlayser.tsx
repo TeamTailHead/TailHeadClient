@@ -6,6 +6,7 @@ interface ResultPlayerProps {
   score: number;
   ranking: number;
   isFirst: boolean;
+  isMe: boolean;
 }
 
 const ResultPlayer: FC<ResultPlayerProps> = ({
@@ -13,9 +14,10 @@ const ResultPlayer: FC<ResultPlayerProps> = ({
   score,
   ranking,
   isFirst,
+  isMe,
 }) => {
   return (
-    <StyledResultPlyaer>
+    <StyledResultPlyaer isMe={isMe}>
       <Ranking isFirst={isFirst}>{ranking}등</Ranking>
       <Name isFirst={isFirst}>{name}</Name>
       <Score isFirst={isFirst}>{score}점</Score>
@@ -25,12 +27,13 @@ const ResultPlayer: FC<ResultPlayerProps> = ({
 
 export default ResultPlayer;
 
-const StyledResultPlyaer = styled.div`
+const StyledResultPlyaer = styled.div<{ isMe: boolean }>`
   display: flex;
   background-color: #b3b3b3;
   flex-grow: 1;
   margin-left: 20%;
   margin-right: 20%;
+  background-color: ${(props) => (props.isMe === true ? "orange" : "#b3b3b3")};
 `;
 
 const Ranking = styled.div<{ isFirst: boolean }>`

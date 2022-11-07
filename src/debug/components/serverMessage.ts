@@ -3,6 +3,17 @@ import { z } from "zod";
 
 export const serverMessageValidators = [
   makeMessageInfo(
+    "joinInfo",
+    z.object({
+      playerId: z.string(),
+      nickname: z.string(),
+    }),
+    {
+      playerId: "AAA",
+      nickname: "A",
+    }
+  ),
+  makeMessageInfo(
     "lobbyInfo",
     z.object({
       adminId: z.string(),
