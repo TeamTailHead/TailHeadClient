@@ -13,7 +13,7 @@ const Debug: FC = () => {
   }
 
   return (
-    <ChakraProvider>
+    <ChakraProvider resetCSS={false}>
       <DebugView />
       <DebugWorker />
     </ChakraProvider>
