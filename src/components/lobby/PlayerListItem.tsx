@@ -25,6 +25,7 @@ export default PlayerListItem;
 
 const StyledPlayerListItem = styled.div`
   display: flex;
+  margin-bottom: 25px;
 `;
 
 const Name = styled.div<{ isAdmin: boolean; isMe: boolean }>`

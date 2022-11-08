@@ -35,4 +35,6 @@ const StyledPlayerList = styled.div`
   flex-direction: column;
   background: #eaeaea;
   border-radius: 24px;
+  margin-left: 15px;
+  margin-top: 30px;
 `;
