@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
 import { FC } from "react";
 import { useRecoilValue } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 import { currentPlayerAtom } from "@/states/currentPlayer";
 import { resultAtom } from "@/states/result";
 import { GameResult } from "@/states/result";
+import { screenStateAtom } from "@/states/screen";
 
 import Screen from "../common/Screen";
 import ResultPlayer from "./ResultPlayser";
@@ -12,6 +14,7 @@ import ResultPlayer from "./ResultPlayser";
 const ResultScreen: FC = () => {
   const result = useRecoilValue(resultAtom);
   const currentPlayer = useRecoilValue(currentPlayerAtom);
+  const setScreenState = useSetRecoilState(screenStateAtom);
 
   const sorted = [...result];
   const currentPlayerId = currentPlayer.id;
@@ -19,10 +22,14 @@ const ResultScreen: FC = () => {
     return b.score - a.score;
   });
 
+  const ToLobby = () => {
+    setScreenState("lobby");
+  };
+
   return (
     <StyledResultScreen>
       <ResultScreenTitle>순위표</ResultScreenTitle>
-      <ResultLobbyButton>로비로</ResultLobbyButton>
+      <ResultLobbyButton onClick={ToLobby}>로비로</ResultLobbyButton>
       <ResultScreenMain>
         {sorted.map((user, idx) => (
           <ResultPlayer
@@ -73,6 +80,7 @@ const ResultLobbyButton = styled.button`
   font-size: 120%;
   font-weight: bold;
   border-radius: 24px;
+
   position: fixed;
   right: 0;
   top: 0;
