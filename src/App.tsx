@@ -31,6 +31,10 @@ const App: React.FC = () => {
       .connect()
       .then(() => setConnectionStatus("connected"))
       .catch(() => setConnectionStatus("error"));
+
+    connection.setOnDisconnect(() => {
+      setConnectionStatus("disconnected");
+    });
   }, []);
 
   return (
