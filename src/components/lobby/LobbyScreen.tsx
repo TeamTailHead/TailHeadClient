@@ -27,8 +27,25 @@ const LobbyScreen: FC = () => {
 
 export default LobbyScreen;
 
-const PlayersBox = styled.div``;
+const PlayersBox = styled.div`
+  background: #eaeaea;
+  border-radius: 24px;
+`;
 
-const ChatBox = styled.div``;
+const ChatBox = styled.div`
+  background: #eaeaea;
+  border-radius: 24px;
+`;
 
-const StartButton = styled.button``;
+const StartButton = styled.button`
+  display: flex;
+  margin: 5% auto;
+  width: 300px;
+  height: 100px;
+
+  justify-content: center;
+  align-items: center;
+  font-size: 300%;
+  font-weight: bold;
+  border-radius: 24px;
+`;
