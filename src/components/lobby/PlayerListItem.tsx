@@ -4,16 +4,19 @@ import { FC } from "react";
 interface PlayerListItemProps {
   nickname: string;
   isAdmin: boolean;
+  isMe: boolean;
 }
 
 const PlayerListItem: FC<PlayerListItemProps> = ({
   nickname: name,
   isAdmin,
+  isMe,
 }) => {
   return (
     <StyledPlayerListItem>
-      <Name>{name}</Name>
-      {isAdmin ? <p>방장</p> : null}
+      <Name isAdmin={isAdmin} isMe={isMe}>
+        {name}
+      </Name>
     </StyledPlayerListItem>
   );
 };
@@ -24,4 +27,8 @@ const StyledPlayerListItem = styled.div`
   display: flex;
 `;
 
-const Name = styled.div``;
+const Name = styled.div<{ isAdmin: boolean; isMe: boolean }>`
+  font-weight: ${(props) => (props.isAdmin === true ? "bold" : "normal")};
+
+  color: ${(props) => (props.isMe === true ? "blue" : "black")};
+`;
