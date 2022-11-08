@@ -22,14 +22,14 @@ const ResultScreen: FC = () => {
     return b.score - a.score;
   });
 
-  const ToLobby = () => {
+  const toLobby = () => {
     setScreenState("lobby");
   };
 
   return (
     <StyledResultScreen>
       <ResultScreenTitle>순위표</ResultScreenTitle>
-      <ResultLobbyButton onClick={ToLobby}>로비로</ResultLobbyButton>
+      <ResultLobbyButton onClick={toLobby}>로비로</ResultLobbyButton>
       <ResultScreenMain>
         {sorted.map((user, idx) => (
           <ResultPlayer
