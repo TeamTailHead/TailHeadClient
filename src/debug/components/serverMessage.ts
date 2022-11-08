@@ -25,8 +25,37 @@ export const serverMessageValidators = [
       ),
     }),
     {
-      adminId: "ABC",
-      players: [{ id: "ABC", nickname: "Hello" }],
+      adminId: "CCC",
+      players: [
+        {
+          id: "AAA",
+          nickname: "A",
+        },
+        {
+          id: "BBB",
+          nickname: "B",
+        },
+        {
+          id: "CCC",
+          nickname: "씨씨씨씨씨씨씨씨씨씨",
+        },
+        {
+          id: "DDD",
+          nickname: "가나다라마바사아자차",
+        },
+        {
+          id: "EEE",
+          nickname: "닉네임은10글자까지",
+        },
+        {
+          id: "FFF",
+          nickname: "펩시제로가더맛있음!",
+        },
+        {
+          id: "GGG",
+          nickname: "지지지지베이베베이베",
+        },
+      ],
     }
   ),
 
