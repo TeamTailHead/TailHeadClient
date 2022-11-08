@@ -22,6 +22,7 @@ const ResultScreen: FC = () => {
   return (
     <StyledResultScreen>
       <ResultScreenTitle>순위표</ResultScreenTitle>
+      <ResultLobbyButton>로비로</ResultLobbyButton>
       <ResultScreenMain>
         {sorted.map((user, idx) => (
           <ResultPlayer
@@ -49,8 +50,8 @@ const ResultScreenTitle = styled.div`
   font-size: 300%;
   margin: 0 auto 5%;
   width: 200px;
-  background: #b3b3b3;
-  border-radius: 24px;
+  background-color: #b3b3b3;
+  border-radius: 14px;
 `;
 
 const ResultScreenMain = styled.div`
@@ -58,4 +59,21 @@ const ResultScreenMain = styled.div`
   margin-left: 20%;
   margin-right: 20%;
   border-radius: 24px;
+`;
+
+const ResultLobbyButton = styled.button`
+  display: flex;
+  width: 100px;
+  height: 50px;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+  background: #f3f3f3;
+  color: #868686;
+  font-size: 120%;
+  font-weight: bold;
+  border-radius: 24px;
+  position: fixed;
+  right: 0;
+  top: 0;
 `;
