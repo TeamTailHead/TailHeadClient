@@ -3,7 +3,11 @@ import { createContext, FC, ReactNode, useContext } from "react";
 import { Connection } from "../socket/types";
 import { notInitializedObject } from "../util";
 
-export const ConnectionContext = createContext<Connection>(
+interface ConnectionContext {
+  connection: Connection;
+}
+
+export const ConnectionContext = createContext<ConnectionContext>(
   notInitializedObject("ConnectionContext")
 );
 
@@ -16,19 +20,29 @@ export const ConnectionProvider: FC<ConnectionProviderProps> = ({
   children,
   connection,
 }) => {
+  const ctx: ConnectionContext = {
+    connection,
+  };
+
   return (
-    <ConnectionContext.Provider value={connection}>
+    <ConnectionContext.Provider value={ctx}>
       {children}
     </ConnectionContext.Provider>
   );
 };
 
 export const useConnection = () => {
-  const connection = useContext(ConnectionContext);
+  const { connection } = useContext(ConnectionContext);
 
   return {
     async connect() {
-      connection.connect();
+      await connection.connect();
+    },
+    async disconnect() {
+      await connection.disconnect();
+    },
+    setOnDisconnect(callback: () => void) {
+      connection.onDisconnect(callback);
     },
   };
 };

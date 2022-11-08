@@ -13,7 +13,7 @@ const JoinScreen: FC = () => {
 
   const [nickname, setNickname] = useState("");
 
-  const handleJoin = () => {
+  const handleJoin = async () => {
     setJoinStatus({
       state: "loading",
     });
