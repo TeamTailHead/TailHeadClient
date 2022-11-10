@@ -1,6 +1,6 @@
 import { createContext, FC, ReactNode, useContext } from "react";
 
-import { Connection } from "../socket/types";
+import { Connection } from "../types";
 import { notInitializedObject } from "../util";
 
 interface ConnectionContext {

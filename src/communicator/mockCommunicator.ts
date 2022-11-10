@@ -1,6 +1,6 @@
 import { ClientCommunicator } from "@tailhead/communicator";
 
-import { Connection } from "./socket/types";
+import { Connection } from "./types";
 
 export function createMockCommunicator() {
   const communicator: ClientCommunicator = {

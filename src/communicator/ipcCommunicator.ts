@@ -1,7 +1,7 @@
 import { ClientCommunicator } from "@tailhead/communicator";
 import { ipcRenderer } from "electron";
 
-import { Connection } from "./socket/types";
+import { Connection } from "./types";
 
 export function createIpcCommunicator(host: string, port: number) {
   const receiveHandlers = new Map();
