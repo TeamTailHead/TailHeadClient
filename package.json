@@ -2,6 +2,7 @@
   "name": "tailhead-client",
   "version": "0.0.1",
   "license": "MIT",
+  "author": "tailhead",
   "main": "dist/electron/main/index.js",
   "scripts": {
     "prepare": "husky install",
@@ -20,7 +21,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@hookform/resolvers": "^2.9.9",
-    "@tailhead/communicator": "^0.0.3",
+    "@tailhead/communicator": "^0.1.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
