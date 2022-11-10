@@ -30,7 +30,7 @@ const LobbyScreen: FC = () => {
     setText(e.target.value);
   };
 
-  const handleMessage = () => {
+  const sendMessage = () => {
     if (text !== "") {
       send("sendChat", { content: text });
       setText("");
@@ -40,7 +40,7 @@ const LobbyScreen: FC = () => {
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleMessage();
+      sendMessage();
     }
   };
 
@@ -82,7 +82,7 @@ const LobbyScreen: FC = () => {
             ref={inputRef}
             onKeyPress={handleKeyPress}
           />
-          <ChatInputButton onClick={handleMessage}>전송</ChatInputButton>
+          <ChatInputButton onClick={sendMessage}>전송</ChatInputButton>
         </InputBox>
       </ChatBoxPadding>
 
