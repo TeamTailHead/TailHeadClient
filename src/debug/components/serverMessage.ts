@@ -3,6 +3,17 @@ import { z } from "zod";
 
 export const serverMessageValidators = [
   makeMessageInfo(
+    "joinInfo",
+    z.object({
+      playerId: z.string(),
+      nickname: z.string(),
+    }),
+    {
+      playerId: "AAA",
+      nickname: "A",
+    }
+  ),
+  makeMessageInfo(
     "lobbyInfo",
     z.object({
       adminId: z.string(),
@@ -14,8 +25,37 @@ export const serverMessageValidators = [
       ),
     }),
     {
-      adminId: "ABC",
-      players: [{ id: "ABC", nickname: "Hello" }],
+      adminId: "CCC",
+      players: [
+        {
+          id: "AAA",
+          nickname: "A",
+        },
+        {
+          id: "BBB",
+          nickname: "B",
+        },
+        {
+          id: "CCC",
+          nickname: "씨씨씨씨씨씨씨씨씨씨",
+        },
+        {
+          id: "DDD",
+          nickname: "가나다라마바사아자차",
+        },
+        {
+          id: "EEE",
+          nickname: "닉네임은10글자까지",
+        },
+        {
+          id: "FFF",
+          nickname: "펩시제로가더맛있음!",
+        },
+        {
+          id: "GGG",
+          nickname: "지지지지베이베베이베",
+        },
+      ],
     }
   ),
 
@@ -91,6 +131,31 @@ export const serverMessageValidators = [
           id: "BBB",
           nickname: "B",
           score: 300,
+        },
+        {
+          id: "CCC",
+          nickname: "씨씨씨씨씨씨씨씨씨씨",
+          score: 999,
+        },
+        {
+          id: "DDD",
+          nickname: "가나다라마바사아자차",
+          score: 888,
+        },
+        {
+          id: "EEE",
+          nickname: "닉네임은10글자까지",
+          score: 567,
+        },
+        {
+          id: "FFF",
+          nickname: "펩시제로가더맛있음!",
+          score: 345,
+        },
+        {
+          id: "GGG",
+          nickname: "지지지지베이베베이베",
+          score: 666,
         },
       ],
     }
