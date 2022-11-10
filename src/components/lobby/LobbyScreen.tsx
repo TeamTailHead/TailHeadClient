@@ -4,6 +4,8 @@ import { useRecoilValue } from "recoil";
 
 import { useSendMessage } from "@/communicator";
 import { chatAtom } from "@/states/chat";
+import { currentPlayerAtom } from "@/states/currentPlayer";
+import { lobbyAdminIdAtom } from "@/states/lobby";
 
 import Screen from "../common/Screen";
 import LobbyChatPlayer from "./LobbyChatPlayer";
@@ -11,13 +13,16 @@ import LobbyChatSystem from "./LobbyChatSystem";
 import PlayerList from "./PlayerList";
 
 const LobbyScreen: FC = () => {
+  const lobbyChat = useRecoilValue(chatAtom);
+  const adminId = useRecoilValue(lobbyAdminIdAtom);
+  const currentPlayer = useRecoilValue(currentPlayerAtom);
+
   const send = useSendMessage();
 
   const handleGameStart = () => {
     send("startGame", {});
   };
 
-  const lobbyChat = useRecoilValue(chatAtom);
   const [text, setText] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -26,8 +31,10 @@ const LobbyScreen: FC = () => {
   };
 
   const handleMessage = () => {
-    send("sendChat", { content: text });
-    setText("");
+    if (text !== "") {
+      send("sendChat", { content: text });
+      setText("");
+    }
     inputRef?.current?.focus();
   };
 
@@ -36,6 +43,9 @@ const LobbyScreen: FC = () => {
       handleMessage();
     }
   };
+
+  const currentPlayerId = currentPlayer.id;
+  const isAdmin = currentPlayerId === adminId;
 
   return (
     <Screen>
@@ -63,6 +73,7 @@ const LobbyScreen: FC = () => {
             }
           })}
         </ChatBox>
+
         <InputBox>
           <ChatInput
             placeholder="메시지를 입력하세요"
@@ -74,7 +85,10 @@ const LobbyScreen: FC = () => {
           <ChatInputButton onClick={handleMessage}>전송</ChatInputButton>
         </InputBox>
       </ChatBoxPadding>
-      <StartButton onClick={handleGameStart}>게임 시작!</StartButton>
+
+      <StartButton onClick={handleGameStart} disabled={!isAdmin}>
+        게임 시작!
+      </StartButton>
     </Screen>
   );
 };
@@ -154,4 +168,5 @@ const StartButton = styled.button`
   font-size: 300%;
   font-weight: bold;
   border-radius: 24px;
+  background: #eaeaea;
 `;
