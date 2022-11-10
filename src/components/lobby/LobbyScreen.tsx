@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { FC } from "react";
+import { ChangeEvent, FC, KeyboardEvent, useRef, useState } from "react";
 import { useRecoilValue } from "recoil";
 
 import { useSendMessage } from "@/communicator";
@@ -18,6 +18,24 @@ const LobbyScreen: FC = () => {
   };
 
   const lobbyChat = useRecoilValue(chatAtom);
+  const [text, setText] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
+  const handleMessage = () => {
+    send("sendChat", { content: text });
+    setText("");
+    inputRef?.current?.focus();
+  };
+
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleMessage();
+    }
+  };
 
   return (
     <Screen>
@@ -45,8 +63,16 @@ const LobbyScreen: FC = () => {
             }
           })}
         </ChatBox>
-
-        <ChatInput />
+        <InputBox>
+          <ChatInput
+            placeholder="메시지를 입력하세요"
+            onChange={onChange}
+            value={text}
+            ref={inputRef}
+            onKeyPress={handleKeyPress}
+          />
+          <ChatInputButton onClick={handleMessage}>전송</ChatInputButton>
+        </InputBox>
       </ChatBoxPadding>
       <StartButton onClick={handleGameStart}>게임 시작!</StartButton>
     </Screen>
@@ -74,6 +100,11 @@ const ChatBoxPadding = styled.div`
   align-items: flex-end;
 `;
 
+const InputBox = styled.div`
+  margin-top: 3%;
+  display: flex;
+`;
+
 const ChatBox = styled.div`
   background: #eaeaea;
   border-radius: 24px;
@@ -83,15 +114,31 @@ const ChatBox = styled.div`
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 `;
 
 const ChatInput = styled.input`
   background: #eaeaea;
   border-radius: 24px;
-  width: 400px;
+  width: 300px;
   height: 50px;
 
-  margin-top: 3%;
+  display: flex;
+  flex-wrap: nowrap;
+`;
+
+const ChatInputButton = styled.button`
+  background: #eaeaea;
+  border-radius: 24px;
+  width: 100px;
+  height: 50px;
+
+  font-size: 130%;
+  font-weight: bold;
+
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
   display: flex;
 `;
 
