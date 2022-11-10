@@ -16,6 +16,7 @@ const LobbyScreen: FC = () => {
   const handleGameStart = () => {
     send("startGame", {});
   };
+
   const lobbyChat = useRecoilValue(chatAtom);
 
   return (
@@ -44,6 +45,8 @@ const LobbyScreen: FC = () => {
             }
           })}
         </ChatBox>
+
+        <ChatInput />
       </ChatBoxPadding>
       <StartButton onClick={handleGameStart}>게임 시작!</StartButton>
     </Screen>
@@ -65,19 +68,31 @@ const PlayersBox = styled.div`
 
 const ChatBoxPadding = styled.div`
   display: flex;
-  justify-content: flex-end;
   margin-top: 5%;
   margin-right: 5%;
+  flex-direction: column;
+  align-items: flex-end;
 `;
 
 const ChatBox = styled.div`
   background: #eaeaea;
+  border-radius: 24px;
   width: 400px;
   height: 600px;
   padding: 10px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+`;
+
+const ChatInput = styled.input`
+  background: #eaeaea;
+  border-radius: 24px;
+  width: 400px;
+  height: 50px;
+
+  margin-top: 3%;
+  display: flex;
 `;
 
 const StartButton = styled.button`
