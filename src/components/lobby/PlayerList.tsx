@@ -33,8 +33,9 @@ export default PlayerList;
 const StyledPlayerList = styled.div`
   display: flex;
   border-radius: 24px;
-  width: 20vw;
-  height: 50vh;
+
+  width: 100%;
+  height: 80%;
   margin-top: 3vh;
 
   overflow: auto;
