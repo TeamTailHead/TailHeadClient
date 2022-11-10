@@ -3,6 +3,7 @@ import { ReactElement } from "react";
 import { useRecoilValue } from "recoil";
 
 import ScreenSelector from "./components/common/ScreenSelector";
+import InGameScreen from "./components/ingame/InGameScreen";
 import JoinScreen from "./components/join/JoinScreen";
 import LobbyScreen from "./components/lobby/LobbyScreen";
 import ResultScreen from "./components/result/ResultScreen";
@@ -16,6 +17,7 @@ const App: React.FC = () => {
     { key: "join", component: <JoinScreen /> },
     { key: "lobby", component: <LobbyScreen /> },
     { key: "result", component: <ResultScreen /> },
+    { key: "game", component: <InGameScreen /> },
   ];
 
   return (

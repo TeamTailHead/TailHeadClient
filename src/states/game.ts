@@ -11,8 +11,8 @@ export const gamePlayersAtom = atom<GamePlayer[]>({
   default: [],
 });
 
-export const currentPlayerIdAtom = atom<string>({
-  key: "currentPlayerId",
+export const thisTurnPlayerIdAtom = atom<string>({
+  key: "thisTurnPlayerId",
   default: "",
 });
 
@@ -28,6 +28,11 @@ export const lastWordAtom = atom<string>({
 
 export const deadlineAtom = atom<Date>({
   key: "deadline",
+  default: new Date(),
+});
+
+export const turnTimeStampAtom = atom<Date>({
+  key: "turnTimeStamp",
   default: new Date(),
 });
 

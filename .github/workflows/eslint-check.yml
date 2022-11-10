@@ -2,13 +2,12 @@ name: Check ESLint
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   check:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -16,14 +15,13 @@ jobs:
         node-version: [16.x]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
-    - name: Install dependencies
-      run: yarn --frozen-lockfile --prefer-offline
-    - name: Check ESLint
-      run: yarn lint:eslint
-      
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "yarn"
+      - name: Install dependencies
+        run: yarn --frozen-lockfile --prefer-offline
+      - name: Check ESLint
+        run: yarn lint:eslint

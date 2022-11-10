@@ -3,10 +3,10 @@ import { useSetRecoilState } from "recoil";
 
 import { useSetMessageHandler } from "@/communicator/context/communicator";
 import {
-  currentPlayerIdAtom,
   deadlineAtom,
   gamePlayersAtom,
   lastWordAtom,
+  thisTurnPlayerIdAtom,
   turnSequenceAtom,
 } from "@/states/game";
 import { screenStateAtom } from "@/states/screen";
@@ -15,7 +15,7 @@ const GameInfoWorker: FC = () => {
   const setHandler = useSetMessageHandler();
   const setScreenState = useSetRecoilState(screenStateAtom);
   const setGamePlayers = useSetRecoilState(gamePlayersAtom);
-  const setCurrentPlayerId = useSetRecoilState(currentPlayerIdAtom);
+  const setCurrentPlayerId = useSetRecoilState(thisTurnPlayerIdAtom);
   const setLastWord = useSetRecoilState(lastWordAtom);
   const setDeadLine = useSetRecoilState(deadlineAtom);
   const setTurnSequence = useSetRecoilState(turnSequenceAtom);

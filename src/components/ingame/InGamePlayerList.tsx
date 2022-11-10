@@ -2,13 +2,13 @@ import styled from "@emotion/styled";
 import { FC } from "react";
 import { useRecoilValue } from "recoil";
 
-import { currentPlayerIdAtom, gamePlayersAtom } from "@/states/game";
+import { gamePlayersAtom, thisTurnPlayerIdAtom } from "@/states/game";
 
 import InGamePlayerListItem from "./InGamePlayerListItem";
 
 const InGamePlayerList: FC = () => {
   const players = useRecoilValue(gamePlayersAtom);
-  const currentPlayer = useRecoilValue(currentPlayerIdAtom);
+  const currentPlayer = useRecoilValue(thisTurnPlayerIdAtom);
 
   return (
     <StyledInGamePlayerList>
