@@ -32,9 +32,12 @@ export default PlayerList;
 
 const StyledPlayerList = styled.div`
   display: flex;
+  border-radius: 24px;
+  width: 20vw;
+  height: 50vh;
+  margin-top: 3vh;
+
+  overflow: auto;
   flex-direction: column;
   background: #eaeaea;
-  border-radius: 24px;
-  margin-left: 15px;
-  margin-top: 30px;
 `;
