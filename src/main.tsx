@@ -7,7 +7,7 @@ import { CommunicatorProvider } from "./communicator/context/communicator";
 import { ConnectionProvider } from "./communicator/context/connection";
 import SocketProvider from "./communicator/context/socket";
 import { createDebugSocket } from "./communicator/socket/debugSocket";
-import { createNodeSocket } from "./communicator/socket/nodeSocket";
+import { createIpcSocket } from "./communicator/socket/ipcSocket";
 import { parseConnectionURL } from "./communicator/util";
 import { CommunicatorWorker } from "./components/worker";
 import { SOCKET_SERVER_URL, USE_DEBUG_SOCKET } from "./const";
@@ -25,7 +25,7 @@ const socketFactory = () => {
 
   const { host, port } = parseConnectionURL(SOCKET_SERVER_URL);
 
-  return createNodeSocket({
+  return createIpcSocket({
     host: host,
     port: port,
   });

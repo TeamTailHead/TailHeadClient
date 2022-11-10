@@ -3,6 +3,7 @@ import { release } from "os";
 import { join } from "path";
 
 import { createMenu } from "./menu";
+import { createSocket } from "./socket";
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith("6.1")) app.disableHardwareAcceleration();
@@ -52,6 +53,7 @@ async function createWindow() {
   });
 
   createMenu(win);
+  createSocket(win.webContents);
 }
 
 app.whenReady().then(createWindow);

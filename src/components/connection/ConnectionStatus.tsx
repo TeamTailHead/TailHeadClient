@@ -4,11 +4,11 @@ import { FC } from "react";
 import Screen from "../common/Screen";
 
 interface ConnectionStatusProps {
-  status: "connecting" | "connected" | "disconnected" | "error";
+  status: "idle" | "connecting" | "connected" | "disconnected" | "error";
 }
 
 const ConnectionStatus: FC<ConnectionStatusProps> = ({ status }) => {
-  if (status === "connected") {
+  if (status === "connected" || status === "idle") {
     return null;
   }
 
@@ -23,6 +23,7 @@ const ConnectionStatus: FC<ConnectionStatusProps> = ({ status }) => {
           } else if (status === "error") {
             return <ConnectionText>연결에 오류가 발생했습니다.</ConnectionText>;
           }
+          return null;
         })()}
       </ConnectionDisplay>
     </StyledConnectionStatus>
