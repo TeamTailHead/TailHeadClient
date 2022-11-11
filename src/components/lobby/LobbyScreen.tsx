@@ -49,124 +49,153 @@ const LobbyScreen: FC = () => {
 
   return (
     <Screen>
-      <PlayersBox>
-        접속중인 플레이어
-        <PlayerList />
-      </PlayersBox>
-      <ChatBoxPadding>
-        <ChatBox>
-          {lobbyChat.map((chat, idx) => {
-            if (chat.type === "system") {
-              const { content, level } = chat;
-              return (
-                <LobbyChatSystem level={level} content={content} key={idx} />
-              );
-            } else {
-              const { content, nickname } = chat;
-              return (
-                <LobbyChatPlayer
-                  nickname={nickname}
-                  content={content}
-                  key={idx}
-                />
-              );
-            }
-          })}
-        </ChatBox>
+      <LobbyScreenBox>
+        <LobbyUpperBox>
+          <PlayersBox>
+            접속중인 플레이어
+            <PlayerList />
+          </PlayersBox>
 
-        <InputBox>
-          <ChatInput
-            placeholder="메시지를 입력하세요"
-            onChange={onChange}
-            value={text}
-            ref={inputRef}
-            onKeyPress={handleKeyPress}
-          />
-          <ChatInputButton onClick={sendMessage}>전송</ChatInputButton>
-        </InputBox>
-      </ChatBoxPadding>
+          <ChatBoxPadding>
+            <ChatBox>
+              {lobbyChat.map((chat, idx) => {
+                if (chat.type === "system") {
+                  const { content, level } = chat;
+                  return (
+                    <LobbyChatSystem
+                      level={level}
+                      content={content}
+                      key={idx}
+                    />
+                  );
+                } else {
+                  const { content, nickname } = chat;
+                  return (
+                    <LobbyChatPlayer
+                      nickname={nickname}
+                      content={content}
+                      key={idx}
+                    />
+                  );
+                }
+              })}
+            </ChatBox>
 
-      <StartButton onClick={handleGameStart} disabled={!isAdmin}>
-        게임 시작!
-      </StartButton>
+            <InputBox>
+              <ChatInput
+                placeholder="메시지를 입력하세요"
+                onChange={onChange}
+                value={text}
+                ref={inputRef}
+                onKeyPress={handleKeyPress}
+              />
+              <ChatInputButton onClick={sendMessage}>전송</ChatInputButton>
+            </InputBox>
+          </ChatBoxPadding>
+        </LobbyUpperBox>
+        <StartButton onClick={handleGameStart} disabled={!isAdmin}>
+          게임 시작!
+        </StartButton>
+      </LobbyScreenBox>
     </Screen>
   );
 };
 
 export default LobbyScreen;
 
+const LobbyScreenBox = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+`;
+
+const LobbyUpperBox = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
 const PlayersBox = styled.div`
-  background: #eaeaea;
   border-radius: 24px;
-  width: 200px;
+  width: 30vw;
+  height: 60vh;
+  margin-top: 5vh;
+  margin-left: 5vw;
+
   text-align: center;
+  border: 2px solid black;
+  font-size: 20px;
   font-weight: bold;
-  position: absolute;
-  left: 80px;
-  top: 80px;
-`;
-
-const ChatBoxPadding = styled.div`
-  display: flex;
-  margin-top: 5%;
-  margin-right: 5%;
-  flex-direction: column;
-  align-items: flex-end;
-`;
-
-const InputBox = styled.div`
-  margin-top: 3%;
-  display: flex;
-`;
-
-const ChatBox = styled.div`
   background: #eaeaea;
-  border-radius: 24px;
-  width: 400px;
-  height: 600px;
-  padding: 10px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-`;
-
-const ChatInput = styled.input`
-  background: #eaeaea;
-  border-radius: 24px;
-  width: 300px;
-  height: 50px;
-
-  display: flex;
-  flex-wrap: nowrap;
-`;
-
-const ChatInputButton = styled.button`
-  background: #eaeaea;
-  border-radius: 24px;
-  width: 100px;
-  height: 50px;
-
-  font-size: 130%;
-  font-weight: bold;
-
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  display: flex;
 `;
 
 const StartButton = styled.button`
   display: flex;
   margin: auto;
-  width: 300px;
-  height: 100px;
+  border-radius: 24px;
+  width: 20vw;
+  height: 10vh;
+  margin-bottom: 5vh;
 
-  z-index: 1;
   justify-content: center;
   align-items: center;
-  font-size: 300%;
+
+  border: 2px solid black;
+  font-size: 3vw;
   font-weight: bold;
+  background: #eaeaea;
+`;
+
+const ChatBoxPadding = styled.div`
+  display: flex;
+  margin-top: 5vh;
+  margin-right: 5vw;
+
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
+const InputBox = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 3vh;
+`;
+
+const ChatBox = styled.div`
+  display: flex;
   border-radius: 24px;
+  width: 35vw;
+  height: 50vh;
+  padding: 10px;
+
+  overflow: auto;
+  flex-direction: column;
+  border: 2px solid black;
+  background: #eaeaea;
+`;
+
+const ChatInput = styled.input`
+  display: flex;
+  border-radius: 24px;
+  width: 30vw;
+  height: 5vh;
+
+  flex-wrap: nowrap;
+  border: 2px solid black;
+  background: #eaeaea;
+`;
+
+const ChatInputButton = styled.button`
+  display: flex;
+  border-radius: 24px;
+  width: 5vw;
+  height: 5vh;
+  font-weight: bold;
+
+  border: 2px solid black;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+
   background: #eaeaea;
 `;
