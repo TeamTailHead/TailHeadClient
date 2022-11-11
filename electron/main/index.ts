@@ -53,7 +53,7 @@ async function createWindow() {
   });
 
   createMenu(win);
-  setupCommunicator(win.webContents);
+  setupCommunicator(win);
 }
 
 app.whenReady().then(createWindow);

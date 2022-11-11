@@ -3,7 +3,7 @@ import {
   ServerMessage,
   StringClientCommunicator,
 } from "@tailhead/communicator";
-import { ipcMain, WebContents } from "electron";
+import { BrowserWindow, ipcMain } from "electron";
 import net from "net";
 
 const serverMessageTypes: Array<keyof ServerMessage> = [
@@ -16,19 +16,15 @@ const serverMessageTypes: Array<keyof ServerMessage> = [
   "systemChat",
 ];
 
-export function setupCommunicator(webContent: WebContents) {
+export function setupCommunicator(win: BrowserWindow) {
+  const webContent = win.webContents;
+
   const socket = new net.Socket();
   const nodeSocket = new NodeSocketClient(socket);
   const communicator = new StringClientCommunicator(nodeSocket);
 
   ipcMain.handle("communicator:send", async (_, { type, data }) => {
     communicator.send(type, data);
-  });
-
-  serverMessageTypes.forEach((type) => {
-    communicator.onReceive(type, (data) => {
-      webContent.send("communicator:receive", { type, data });
-    });
   });
 
   ipcMain.handle("connection:connect", async (_, { host, port }) => {
@@ -46,5 +42,15 @@ export function setupCommunicator(webContent: WebContents) {
 
   nodeSocket.onDisconnect(() => {
     webContent.send("connection:disconnected");
+  });
+
+  serverMessageTypes.forEach((type) => {
+    communicator.onReceive(type, (data) => {
+      webContent.send("communicator:receive", { type, data });
+    });
+  });
+
+  win.on("close", () => {
+    nodeSocket.close();
   });
 }
