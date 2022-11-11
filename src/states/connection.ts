@@ -1,13 +1,13 @@
 import { atom } from "recoil";
 
-type ConnectionStatus =
-  | "idle"
-  | "connecting"
-  | "connected"
-  | "disconnected"
-  | "error";
+type ConnectionState =
+  | { status: "idle" }
+  | { status: "connecting" }
+  | { status: "connected" }
+  | { status: "disconnected" }
+  | { status: "error"; error: Error };
 
-export const connectionStatusAtom = atom<ConnectionStatus>({
+export const connectionStateAtom = atom<ConnectionState>({
   key: "connectionStatus",
-  default: "idle",
+  default: { status: "idle" },
 });

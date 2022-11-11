@@ -4,7 +4,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 
 import { useSendMessage } from "@/communicator";
 import { useConnection } from "@/communicator/context/connection";
-import { connectionStatusAtom } from "@/states/connection";
+import { connectionStateAtom } from "@/states/connection";
 import { joinStatusAtom } from "@/states/join";
 
 import Screen from "../common/Screen";
@@ -14,7 +14,7 @@ const JoinScreen: FC = () => {
 
   const send = useSendMessage();
   const [joinStatus, setJoinStatus] = useRecoilState(joinStatusAtom);
-  const setConnectionStatus = useSetRecoilState(connectionStatusAtom);
+  const setConnectionStatus = useSetRecoilState(connectionStateAtom);
 
   const [nickname, setNickname] = useState("");
 
@@ -22,11 +22,16 @@ const JoinScreen: FC = () => {
     setJoinStatus({
       state: "loading",
     });
-    setConnectionStatus("connecting");
+    setConnectionStatus({ status: "connecting" });
+    connection.setOnError((error) => {
+      setConnectionStatus({ status: "error", error });
+    });
     await connection.connect();
-    setConnectionStatus("connected");
+    connection.setOnError(() => {
+      //
+    });
+    setConnectionStatus({ status: "connected" });
 
-    console.log("Connected");
     send("join", {
       nickname,
     });

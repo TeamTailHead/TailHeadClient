@@ -3,11 +3,14 @@ import { ipcRenderer } from "electron";
 
 import { Connection } from "./types";
 
+const noopFunc = () => {
+  //
+};
+
 export function createIpcCommunicator(host: string, port: number) {
   const receiveHandlers = new Map();
-  let disconnectHandler: () => void = () => {
-    //
-  };
+  let disconnectHandler: () => void = noopFunc;
+  let errorHandler: (error: Error) => void = noopFunc;
 
   const communicator: ClientCommunicator = {
     onReceive(type, fn) {
@@ -28,6 +31,9 @@ export function createIpcCommunicator(host: string, port: number) {
     onDisconnect(callback) {
       disconnectHandler = callback;
     },
+    onError(callback) {
+      errorHandler = callback;
+    },
   };
 
   ipcRenderer.on("communicator:receive", (_, { type, data }) => {
@@ -41,6 +47,10 @@ export function createIpcCommunicator(host: string, port: number) {
 
   ipcRenderer.on("connection:disconnect", () => {
     disconnectHandler();
+  });
+
+  ipcRenderer.on("connection:error", (_, { error }) => {
+    errorHandler(error);
   });
 
   return { communicator, connection };

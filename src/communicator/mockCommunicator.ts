@@ -22,6 +22,9 @@ export function createMockCommunicator() {
     onDisconnect() {
       //
     },
+    onError() {
+      //
+    },
   };
 
   return { communicator, connection };

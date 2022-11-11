@@ -7,7 +7,7 @@ import ConnectionStatus from "./components/connection/ConnectionStatus";
 import JoinScreen from "./components/join/JoinScreen";
 import LobbyScreen from "./components/lobby/LobbyScreen";
 import ResultScreen from "./components/result/ResultScreen";
-import { connectionStatusAtom } from "./states/connection";
+import { connectionStateAtom } from "./states/connection";
 import { ScreenState, screenStateAtom } from "./states/screen";
 import GlobalStyle from "./styles/GlobalStyle";
 
@@ -21,7 +21,7 @@ type ConnectionStatus = "connecting" | "connected" | "disconnected" | "error";
 
 const App: React.FC = () => {
   const screenState = useRecoilValue(screenStateAtom);
-  const connectionStatus = useRecoilValue(connectionStatusAtom);
+  const connectionStatus = useRecoilValue(connectionStateAtom);
 
   return (
     <StyledApp>

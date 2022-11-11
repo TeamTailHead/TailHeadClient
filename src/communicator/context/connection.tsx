@@ -44,5 +44,8 @@ export const useConnection = () => {
     setOnDisconnect(callback: () => void) {
       connection.onDisconnect(callback);
     },
+    setOnError(callback: (error: Error) => void) {
+      connection.onError(callback);
+    },
   };
 };

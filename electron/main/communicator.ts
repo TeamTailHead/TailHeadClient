@@ -39,6 +39,11 @@ export function setupCommunicator(webContent: WebContents) {
     await nodeSocket.close();
   });
 
+  socket.on("error", (error) => {
+    console.error(error);
+    webContent.send("connection:error", { error });
+  });
+
   nodeSocket.onDisconnect(() => {
     webContent.send("connection:disconnected");
   });

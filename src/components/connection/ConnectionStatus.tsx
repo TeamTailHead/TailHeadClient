@@ -1,27 +1,47 @@
 import styled from "@emotion/styled";
 import { FC } from "react";
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
+
+import { connectionStateAtom } from "@/states/connection";
+import { joinStatusAtom } from "@/states/join";
+import { screenStateAtom } from "@/states/screen";
 
 import Screen from "../common/Screen";
 
-interface ConnectionStatusProps {
-  status: "idle" | "connecting" | "connected" | "disconnected" | "error";
-}
+const ConnectionStatus: FC = () => {
+  const [state, setState] = useRecoilState(connectionStateAtom);
+  const setScreenState = useSetRecoilState(screenStateAtom);
+  const resetJoinState = useResetRecoilState(joinStatusAtom);
 
-const ConnectionStatus: FC<ConnectionStatusProps> = ({ status }) => {
-  if (status === "connected" || status === "idle") {
+  if (state.status === "connected" || state.status === "idle") {
     return null;
   }
+
+  const goMain = () => {
+    setScreenState("join");
+    setState({ status: "idle" });
+    resetJoinState();
+  };
 
   return (
     <StyledConnectionStatus>
       <ConnectionDisplay>
         {(() => {
-          if (status === "connecting") {
+          if (state.status === "connecting") {
             return <ConnectionText>연결중...</ConnectionText>;
-          } else if (status === "disconnected") {
-            return <ConnectionText>연결이 끊어졌습니다.</ConnectionText>;
-          } else if (status === "error") {
-            return <ConnectionText>연결에 오류가 발생했습니다.</ConnectionText>;
+          } else if (state.status === "disconnected") {
+            return (
+              <ConnectionText>서버와의 연결이 끊어졌습니다.</ConnectionText>
+            );
+          } else if (state.status === "error") {
+            return (
+              <>
+                <ConnectionText>
+                  {"서버와의 연결에 실패했습니다.\n" + String(state.error)}
+                </ConnectionText>
+                <ActionButton onClick={goMain}>처음으로</ActionButton>
+              </>
+            );
           }
           return null;
         })()}
@@ -46,13 +66,30 @@ const StyledConnectionStatus = styled(Screen)`
 `;
 
 const ConnectionDisplay = styled.div`
-  width: 300px;
+  width: 400px;
   padding: 30px 0;
 
   background-color: #ffffff;
 `;
 
-const ConnectionText = styled.div`
+const ConnectionText = styled.p`
   color: black;
   text-align: center;
+  white-space: pre-wrap;
+`;
+
+const ActionButton = styled.button`
+  display: block;
+  margin: 20px auto 0 auto;
+
+  border: none;
+  padding: 5px 10px;
+
+  cursor: pointer;
+
+  background-color: #eaeaea;
+
+  &:hover {
+    background-color: #dadada;
+  }
 `;
