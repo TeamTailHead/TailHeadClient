@@ -30,7 +30,8 @@ const StyledPlayerListItem = styled.div`
 `;
 
 const Name = styled.div<{ isAdmin: boolean; isMe: boolean }>`
-  font-weight: ${(props) => (props.isAdmin === true ? "bold" : "normal")};
+  font-weight: ${(props) => (props.isAdmin === true ? "1000" : "500")};
+  background: ${(props) => (props.isAdmin === true ? "#e1e951" : "")};
   font-size: inherit;
-  color: ${(props) => (props.isMe === true ? "blue" : "black")};
+  color: ${(props) => (props.isMe === true ? "#fe4949" : "black")};
 `;

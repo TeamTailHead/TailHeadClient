@@ -126,7 +126,7 @@ const PlayersBox = styled.div`
   border: 2px solid black;
   font-size: 20px;
   font-weight: bold;
-  background: #eaeaea;
+  background: #d7e6ff;
 `;
 
 const StartButton = styled.button`
@@ -143,7 +143,7 @@ const StartButton = styled.button`
   border: 2px solid black;
   font-size: 3vw;
   font-weight: bold;
-  background: #eaeaea;
+  background: #d7e6ff;
 `;
 
 const ChatBoxPadding = styled.div`
@@ -171,7 +171,7 @@ const ChatBox = styled.div`
   overflow: auto;
   flex-direction: column;
   border: 2px solid black;
-  background: #eaeaea;
+  background: #d7e6ff;
 `;
 
 const ChatInput = styled.input`
@@ -182,7 +182,7 @@ const ChatInput = styled.input`
 
   flex-wrap: nowrap;
   border: 2px solid black;
-  background: #eaeaea;
+  background: #d7e6ff;
 `;
 
 const ChatInputButton = styled.button`
@@ -197,5 +197,5 @@ const ChatInputButton = styled.button`
   justify-content: center;
   align-items: center;
 
-  background: #eaeaea;
+  background: #d7e6ff;
 `;
