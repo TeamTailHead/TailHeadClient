@@ -51,6 +51,6 @@ export function setupCommunicator(win: BrowserWindow) {
   });
 
   win.on("close", () => {
-    nodeSocket.close();
+    socket.destroy();
   });
 }
