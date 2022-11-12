@@ -40,6 +40,15 @@ export function setupCommunicator(win: BrowserWindow) {
     webContent.send("connection:error", { error });
   });
 
+  socket.on("end", () => {
+    console.log("END");
+    webContent.send("connection:disconnected");
+  });
+
+  socket.on("timeout", () => {
+    webContent.send("connection:disconnected");
+  });
+
   nodeSocket.onDisconnect(() => {
     webContent.send("connection:disconnected");
   });

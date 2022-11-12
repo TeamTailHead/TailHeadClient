@@ -27,10 +27,10 @@ const JoinScreen: FC = () => {
       setConnectionStatus({ status: "error", error });
     });
     await connection.connect();
-    connection.setOnError(() => {
-      //
-    });
     setConnectionStatus({ status: "connected" });
+    connection.setOnDisconnect(() => {
+      setConnectionStatus({ status: "disconnected" });
+    });
 
     send("join", {
       nickname,

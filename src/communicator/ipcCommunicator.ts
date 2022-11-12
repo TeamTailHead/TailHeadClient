@@ -45,7 +45,7 @@ export function createIpcCommunicator(host: string, port: number) {
     handler(data);
   });
 
-  ipcRenderer.on("connection:disconnect", () => {
+  ipcRenderer.on("connection:disconnected", () => {
     disconnectHandler();
   });
 
