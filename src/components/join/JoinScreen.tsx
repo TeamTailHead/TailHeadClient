@@ -23,14 +23,8 @@ const JoinScreen: FC = () => {
       state: "loading",
     });
     setConnectionStatus({ status: "connecting" });
-    connection.setOnError((error) => {
-      setConnectionStatus({ status: "error", error });
-    });
     await connection.connect();
     setConnectionStatus({ status: "connected" });
-    connection.setOnDisconnect(() => {
-      setConnectionStatus({ status: "disconnected" });
-    });
 
     send("join", {
       nickname,
