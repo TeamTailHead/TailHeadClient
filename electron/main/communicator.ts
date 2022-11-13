@@ -33,6 +33,7 @@ export function setupCommunicator(win: BrowserWindow) {
   });
 
   ipcMain.handle("connection:connect", async (_, { host, port }) => {
+    socket.setTimeout(2000);
     return new Promise((resolve, reject) => {
       console.log("Connection Start");
       socket.destroy();
@@ -44,8 +45,6 @@ export function setupCommunicator(win: BrowserWindow) {
   ipcMain.handle("connection:disconnect", async () => {
     await nodeSocket.close();
   });
-
-  socket.setTimeout(2000);
 
   socket
     .on("error", (error) => {
