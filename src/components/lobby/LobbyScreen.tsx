@@ -103,6 +103,8 @@ const LobbyScreen: FC = () => {
 
 export default LobbyScreen;
 
+const BACKGROUND_COLOR = "#d7e6ff";
+
 const LobbyScreenBox = styled.div`
   display: flex;
   width: 100vw;
@@ -126,7 +128,7 @@ const PlayersBox = styled.div`
   border: 2px solid black;
   font-size: 20px;
   font-weight: bold;
-  background: #d7e6ff;
+  background: ${BACKGROUND_COLOR};
 `;
 
 const StartButton = styled.button`
@@ -143,7 +145,7 @@ const StartButton = styled.button`
   border: 2px solid black;
   font-size: 3vw;
   font-weight: bold;
-  background: #d7e6ff;
+  background: ${BACKGROUND_COLOR};
 `;
 
 const ChatBoxPadding = styled.div`
@@ -171,7 +173,7 @@ const ChatBox = styled.div`
   overflow: auto;
   flex-direction: column;
   border: 2px solid black;
-  background: #d7e6ff;
+  background: ${BACKGROUND_COLOR};
 `;
 
 const ChatInput = styled.input`
@@ -182,7 +184,7 @@ const ChatInput = styled.input`
 
   flex-wrap: nowrap;
   border: 2px solid black;
-  background: #d7e6ff;
+  background: ${BACKGROUND_COLOR};
 `;
 
 const ChatInputButton = styled.button`
@@ -197,5 +199,5 @@ const ChatInputButton = styled.button`
   justify-content: center;
   align-items: center;
 
-  background: #d7e6ff;
+  background: ${BACKGROUND_COLOR};
 `;
