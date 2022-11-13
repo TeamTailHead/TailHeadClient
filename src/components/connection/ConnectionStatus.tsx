@@ -31,7 +31,10 @@ const ConnectionStatus: FC = () => {
             return <ConnectionText>연결중...</ConnectionText>;
           } else if (state.status === "disconnected") {
             return (
-              <ConnectionText>서버와의 연결이 끊어졌습니다.</ConnectionText>
+              <>
+                <ConnectionText>서버와의 연결이 끊어졌습니다.</ConnectionText>
+                <ActionButton onClick={goMain}>처음으로</ActionButton>
+              </>
             );
           } else if (state.status === "error") {
             return (

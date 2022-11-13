@@ -23,35 +23,48 @@ export function setupCommunicator(win: BrowserWindow) {
   const nodeSocket = new NodeSocketClient(socket);
   const communicator = new StringClientCommunicator(nodeSocket);
 
+  const connectionResolvers: Array<{
+    resolve: (r: unknown) => void;
+    reject: (err: unknown) => void;
+  }> = [];
+
   ipcMain.handle("communicator:send", async (_, { type, data }) => {
     communicator.send(type, data);
   });
 
   ipcMain.handle("connection:connect", async (_, { host, port }) => {
-    return nodeSocket.connect(host, port);
+    return new Promise((resolve, reject) => {
+      console.log("Connection Start");
+      socket.destroy();
+      nodeSocket.connect(host, port);
+      connectionResolvers.push({ resolve, reject });
+    });
   });
 
   ipcMain.handle("connection:disconnect", async () => {
     await nodeSocket.close();
   });
 
-  socket.on("error", (error) => {
-    console.error(error);
-    webContent.send("connection:error", { error });
-  });
+  socket.setTimeout(2000);
 
-  socket.on("end", () => {
-    console.log("END");
-    webContent.send("connection:disconnected");
-  });
-
-  socket.on("timeout", () => {
-    webContent.send("connection:disconnected");
-  });
-
-  nodeSocket.onDisconnect(() => {
-    webContent.send("connection:disconnected");
-  });
+  socket
+    .on("error", (error) => {
+      console.error(error);
+      webContent.send("connection:error", { error });
+      connectionResolvers.splice(0)[0]?.reject(error);
+    })
+    .on("end", () => {
+      console.log("Connection Lost");
+      webContent.send("connection:disconnected");
+    })
+    .on("timeout", () => {
+      console.log("Connection Timeout");
+      webContent.send("connection:disconnected");
+    })
+    .on("connect", () => {
+      webContent.send("connection:connected");
+      connectionResolvers.splice(0)[0]?.resolve({});
+    });
 
   serverMessageTypes.forEach((type) => {
     communicator.onReceive(type, (data) => {
