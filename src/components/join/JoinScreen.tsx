@@ -1,10 +1,8 @@
 import styled from "@emotion/styled";
 import { FC, useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
-import { useSendMessage } from "@/communicator";
 import { useConnection } from "@/communicator/context/connection";
-import { connectionStateAtom } from "@/states/connection";
 import { joinStatusAtom } from "@/states/join";
 
 import Screen from "../common/Screen";
@@ -12,23 +10,12 @@ import Screen from "../common/Screen";
 const JoinScreen: FC = () => {
   const connection = useConnection();
 
-  const send = useSendMessage();
-  const [joinStatus, setJoinStatus] = useRecoilState(joinStatusAtom);
-  const setConnectionStatus = useSetRecoilState(connectionStateAtom);
+  const joinStatus = useRecoilValue(joinStatusAtom);
 
   const [nickname, setNickname] = useState("");
 
   const handleJoin = async () => {
-    setJoinStatus({
-      state: "loading",
-    });
-    setConnectionStatus({ status: "connecting" });
-    await connection.connect();
-    setConnectionStatus({ status: "connected" });
-
-    send("join", {
-      nickname,
-    });
+    await connection.join(nickname);
   };
 
   return (
