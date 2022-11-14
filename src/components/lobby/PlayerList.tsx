@@ -40,5 +40,5 @@ const StyledPlayerList = styled.div`
 
   overflow: auto;
   flex-direction: column;
-  background: #eaeaea;
+  background: inherit;
 `;

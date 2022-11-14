@@ -16,4 +16,7 @@ const LobbyChatSystem: FC<LobbyChatSystemProps> = ({ level, content }) => {
 
 export default LobbyChatSystem;
 
-const LobbyChatSystemStyle = styled.div``;
+const LobbyChatSystemStyle = styled.div`
+  font-weight: 600;
+  color: #eb6d6d;
+`;

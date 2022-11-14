@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { FC } from "react";
 
@@ -30,7 +31,15 @@ const StyledPlayerListItem = styled.div`
 `;
 
 const Name = styled.div<{ isAdmin: boolean; isMe: boolean }>`
-  font-weight: ${(props) => (props.isAdmin === true ? "bold" : "normal")};
+  ${(props) =>
+    props.isAdmin
+      ? css`
+          font-weight: 1000;
+          background: #e1e951;
+        `
+      : css`
+          font-weight: 400;
+        `};
   font-size: inherit;
-  color: ${(props) => (props.isMe === true ? "blue" : "black")};
+  color: ${(props) => (props.isMe === true ? "#fe4949" : "black")};
 `;
