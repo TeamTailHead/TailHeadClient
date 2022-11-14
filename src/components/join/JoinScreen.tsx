@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 
 import { useSendMessage } from "@/communicator";
 import { joinStatusAtom } from "@/states/join";
-import { glassCardStyle } from "@/styles/glass";
+import { glassCardStyle, primaryGlassButtonColorStyle } from "@/styles/glass";
 
 import Screen from "../common/Screen";
 
@@ -93,18 +93,14 @@ const NicknameInput = styled.input`
 `;
 
 const JoinButton = styled.button`
-  background-color: rgba(115, 85, 150, 0.8);
   margin-left: 10px;
   padding: 5px 15px;
   border-radius: 5px;
   border: none;
-  color: white;
   transition: background-color 0.3s;
   cursor: pointer;
 
-  &:hover {
-    background-color: rgba(115, 85, 150, 0.95);
-  }
+  ${primaryGlassButtonColorStyle}
 `;
 
 const JoinErrorMessage = styled.p`

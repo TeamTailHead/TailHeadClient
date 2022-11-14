@@ -7,7 +7,11 @@ import { lobbyAdminIdAtom, lobbyPlayersAtom } from "@/states/lobby";
 
 import PlayerListItem from "./PlayerListItem";
 
-const PlayerList: FC = () => {
+interface PlayerListProps {
+  className?: string;
+}
+
+const PlayerList: FC<PlayerListProps> = ({ className }) => {
   const players = useRecoilValue(lobbyPlayersAtom);
   const adminId = useRecoilValue(lobbyAdminIdAtom);
 
@@ -15,7 +19,7 @@ const PlayerList: FC = () => {
   const currentPlayerId = currentPlayer.id;
 
   return (
-    <StyledPlayerList>
+    <StyledPlayerList className={className}>
       {players.map((player) => (
         <PlayerListItem
           key={player.id}
@@ -34,11 +38,7 @@ const StyledPlayerList = styled.div`
   display: flex;
   border-radius: 24px;
 
-  width: 100%;
-  height: 80%;
-  margin-top: 3vh;
-
   overflow: auto;
   flex-direction: column;
-  background: inherit;
+  min-height: 0;
 `;
