@@ -8,7 +8,7 @@ import InGamePlayerListItem from "./InGamePlayerListItem";
 
 const InGamePlayerList: FC = () => {
   const players = useRecoilValue(gamePlayersAtom);
-  const currentPlayer = useRecoilValue(thisTurnPlayerIdAtom);
+  const thisTurnPlayerId = useRecoilValue(thisTurnPlayerIdAtom);
 
   return (
     <StyledInGamePlayerList>
@@ -17,7 +17,7 @@ const InGamePlayerList: FC = () => {
           key={player.id}
           nickname={player.nickname}
           score={player.score}
-          isCurrentPlayer={player.nickname === currentPlayer}
+          isThisTurn={player.id === thisTurnPlayerId}
         />
       ))}
     </StyledInGamePlayerList>
@@ -26,4 +26,8 @@ const InGamePlayerList: FC = () => {
 
 export default InGamePlayerList;
 
-const StyledInGamePlayerList = styled.div``;
+const StyledInGamePlayerList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 10px;
+`;

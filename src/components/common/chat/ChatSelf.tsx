@@ -7,17 +7,17 @@ interface LobbyChatSelfProps {
   content: string;
 }
 
-const LobbyChatSelf: FC<LobbyChatSelfProps> = ({ content }) => {
+const ChatSelf: FC<LobbyChatSelfProps> = ({ content }) => {
   return (
-    <StyledLobbyChatSelf>
+    <StyledChatSelf>
       <Content>{content}</Content>
-    </StyledLobbyChatSelf>
+    </StyledChatSelf>
   );
 };
 
-export default LobbyChatSelf;
+export default ChatSelf;
 
-const StyledLobbyChatSelf = styled.div`
+const StyledChatSelf = styled.div`
   margin-bottom: 10px;
   align-self: flex-end;
 `;

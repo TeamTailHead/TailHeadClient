@@ -18,11 +18,11 @@ import {
   glassInputStyle,
 } from "@/styles/glass";
 
-import LobbyChatPlayer from "./LobbyChatPlayer";
-import LobbyChatSelf from "./LobbyChatSelf";
-import LobbyChatSystem from "./LobbyChatSystem";
+import ChatPlayer from "./ChatPlayer";
+import ChatSelf from "./ChatSelf";
+import ChatSystem from "./ChatSystem";
 
-const LobbyChatList: FC = () => {
+const ChatList: FC = () => {
   const lobbyChat = useRecoilValue(chatAtom);
   const currentPlayer = useRecoilValue(currentPlayerAtom);
 
@@ -59,25 +59,21 @@ const LobbyChatList: FC = () => {
   }, [lobbyChat]);
 
   return (
-    <StyledLobbyChatList>
+    <StyledChatList>
       <ChatArea>
         {lobbyChat.map((chat, idx) => {
           if (chat.type === "system") {
             const { content, level } = chat;
-            return (
-              <LobbyChatSystem level={level} content={content} key={idx} />
-            );
+            return <ChatSystem level={level} content={content} key={idx} />;
           }
 
           if (chat.playerId === currentPlayer.id) {
             const { content } = chat;
-            return <LobbyChatSelf content={content} key={idx} />;
+            return <ChatSelf content={content} key={idx} />;
           }
 
           const { content, nickname } = chat;
-          return (
-            <LobbyChatPlayer nickname={nickname} content={content} key={idx} />
-          );
+          return <ChatPlayer nickname={nickname} content={content} key={idx} />;
         })}
         <div ref={chatEndRef} />
       </ChatArea>
@@ -91,13 +87,13 @@ const LobbyChatList: FC = () => {
         />
         <ChatInputButton onClick={sendMessage}>전송</ChatInputButton>
       </InputBox>
-    </StyledLobbyChatList>
+    </StyledChatList>
   );
 };
 
-export default LobbyChatList;
+export default ChatList;
 
-const StyledLobbyChatList = styled.div`
+const StyledChatList = styled.div`
   ${glassCardStyle}
 
   display: flex;
@@ -110,7 +106,6 @@ const StyledLobbyChatList = styled.div`
 
 const InputBox = styled.div`
   display: flex;
-  width: 100%;
   margin-top: 8px;
 `;
 
@@ -141,8 +136,8 @@ const ChatInputButton = styled.button`
   margin-left: 5px;
   display: flex;
   font-weight: bold;
+  min-width: 60px;
 
-  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
 `;
