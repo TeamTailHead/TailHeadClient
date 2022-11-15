@@ -8,10 +8,11 @@ import { glassCardStyle } from "@/styles/glass";
 import ChatList from "../common/chat/ChatList";
 import Screen from "../common/Screen";
 import InGamePlayerList from "./InGamePlayerList";
+import TargetWord from "./TargetWord";
 import TimeBar from "./TimeBar";
 
 const InGameScreen: FC = () => {
-  const LastWord = useRecoilValue(lastWordAtom);
+  const lastWord = useRecoilValue(lastWordAtom);
   // const DeadLine = useRecoilValue(deadlineAtom);
   const turnTimestamp = useRecoilValue(turnTimeStampAtom);
   const deadLineTime = useRecoilValue(deadlineAtom);
@@ -21,8 +22,7 @@ const InGameScreen: FC = () => {
       <LeftSide>
         <GameCard>
           <TimeBar deadline={deadLineTime} turnTimestamp={turnTimestamp} />
-          <LastWordDesign>{LastWord}</LastWordDesign>
-          <GameInformation>제한 시간 안에 단어를 입력해주세요.</GameInformation>
+          <TargetWord word={lastWord} />
         </GameCard>
         <PlayerCard>
           <PlayersBoxDown>
@@ -68,6 +68,8 @@ const GameCard = styled.div`
   ${glassCardStyle}
 
   flex-grow: 1;
+  display: flex;
+  align-items: center;
   flex-direction: column;
 `;
 
@@ -84,13 +86,5 @@ const PlayersBox = styled.div`
 `;
 
 const PlayersBoxDown = styled.div`
-  display: flex;
-`;
-
-const LastWordDesign = styled.div`
-  display: flex;
-`;
-
-const GameInformation = styled.div`
   display: flex;
 `;
