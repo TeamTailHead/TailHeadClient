@@ -7,16 +7,19 @@ interface LobbyChatSystemProps {
 }
 
 const LobbyChatSystem: FC<LobbyChatSystemProps> = ({ level, content }) => {
-  return (
-    <LobbyChatSystemStyle>
-      {level} : {content}
-    </LobbyChatSystemStyle>
-  );
+  return <LobbyChatSystemStyle level={level}>{content}</LobbyChatSystemStyle>;
 };
 
 export default LobbyChatSystem;
 
-const LobbyChatSystemStyle = styled.div`
+const LobbyChatSystemStyle = styled.div<{ level: string }>`
+  color: ${(props) => getColorByLevel(props.level)};
   font-weight: 600;
-  color: #eb6d6d;
+  margin-bottom: 10px;
 `;
+
+function getColorByLevel(level: string) {
+  if (level === "info") return "#464444";
+  else if (level === "error") return "#940606";
+  else return "#abab21";
+}
