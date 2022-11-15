@@ -1,7 +1,7 @@
 import {
+  BinaryClientCommunicator,
   NodeSocketClient,
   ServerMessage,
-  StringClientCommunicator,
 } from "@tailhead/communicator";
 import { BrowserWindow, ipcMain } from "electron";
 import net from "net";
@@ -21,7 +21,7 @@ export function setupCommunicator(win: BrowserWindow) {
 
   const socket = new net.Socket();
   const nodeSocket = new NodeSocketClient(socket);
-  const communicator = new StringClientCommunicator(nodeSocket);
+  const communicator = new BinaryClientCommunicator(nodeSocket);
 
   const connectionResolvers: Array<{
     resolve: (r: unknown) => void;

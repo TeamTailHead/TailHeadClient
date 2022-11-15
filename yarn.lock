@@ -1356,10 +1356,10 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@tailhead/communicator@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@tailhead/communicator/-/communicator-0.1.1.tgz#f857bf6e5458b08609cbf21b00e803b7a7dad411"
-  integrity sha512-+r4DhqKF8PdJvasTnORttsiLWqyzNKOWQvmJckYI/xf2+xmc5bjPdDxdYX2RpVzZGu/DSF5LcBL3Gv4U0QHKQQ==
+"@tailhead/communicator@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@tailhead/communicator/-/communicator-0.2.1.tgz#4f2fa20826c84328cd0f75498e51341e6b780f5e"
+  integrity sha512-W46qL7ly57bNtWwqZslrhNeujEg+Zg3ydvOlqeFO+jUp8pVQuX753LOAAM7kY7yxF+VQxb/kExuiC3XnEIHjEw==
   dependencies:
     nanoid "^3.0.0"
 
