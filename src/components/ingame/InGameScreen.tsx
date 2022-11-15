@@ -45,9 +45,11 @@ const InGameScreen: FC = () => {
     <Screen>
       Game
       <TimeBar deadline={deadLineTime} turnTimestamp={turnTimestamp} />
-      <PlayersBox>
-        <InGamePlayerList />
-      </PlayersBox>
+      <PlayersBoxDown>
+        <PlayersBox>
+          <InGamePlayerList />
+        </PlayersBox>
+      </PlayersBoxDown>
       <LastWordDesign>{LastWord}</LastWordDesign>
       <GameInformation>제한 시간 안에 단어를 입력해주세요.</GameInformation>
       <ChatBoxPadding>
@@ -90,7 +92,16 @@ const InGameScreen: FC = () => {
 
 export default InGameScreen;
 
-const PlayersBox = styled.div``;
+const PlayersBox = styled.div`
+  display: flex;
+  margin-top: 95%;
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
+const PlayersBoxDown = styled.div`
+  display: flex;
+`;
 
 const ChatBoxPadding = styled.div`
   display: flex;
@@ -140,8 +151,12 @@ const ChatInputButton = styled.button`
 `;
 const GameTimeLimit = styled.div``;
 
-const LastWordDesign = styled.div``;
+const LastWordDesign = styled.div`
+  display: flex;
+`;
 
-const GameInformation = styled.div``;
+const GameInformation = styled.div`
+  display: flex;
+`;
 
 const FullTimeBar = styled.div``;
