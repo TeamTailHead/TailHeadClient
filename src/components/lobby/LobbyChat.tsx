@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
-import { ChangeEvent, FC, KeyboardEvent, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  FC,
+  KeyboardEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useRecoilValue } from "recoil";
 
 import { useSendMessage } from "@/communicator";
@@ -39,6 +46,15 @@ const LobbyChat: FC = () => {
     }
   };
 
+  const chatEndRef = useRef<HTMLDivElement>(null);
+  const scrollToEnd = () => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToEnd();
+  }, [lobbyChat]);
+
   return (
     <StyledLobbyChat>
       <ChatArea>
@@ -59,6 +75,7 @@ const LobbyChat: FC = () => {
             );
           }
         })}
+        <div ref={chatEndRef} />
       </ChatArea>
       <InputBox>
         <ChatInput
