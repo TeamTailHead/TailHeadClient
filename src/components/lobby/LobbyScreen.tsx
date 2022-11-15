@@ -72,7 +72,7 @@ const LobbyUpperBox = styled.div`
 const PlayerListCard = styled.div`
   ${glassCardStyle}
 
-  width: 30%;
+  width: 40%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -93,6 +93,7 @@ const GameTitle = styled.h2`
 
 const StyledPlayerList = styled(PlayerList)`
   flex-grow: 1;
+  margin-top: 15px;
 `;
 
 const StartButton = styled.button`
