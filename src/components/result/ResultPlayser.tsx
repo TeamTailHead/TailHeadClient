@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { FC } from "react";
+import { TfiCrown } from "react-icons/Tfi";
 
 interface ResultPlayerProps {
   nickname: string;
@@ -17,49 +18,46 @@ const ResultPlayer: FC<ResultPlayerProps> = ({
   isMe,
 }) => {
   return (
-    <StyledResultFirstPlyaer isFirst={isFirst}>
-      <StyledResultPlyaer isMe={isMe}>
-        <Ranking isFirst={isFirst}>{ranking}등</Ranking>
-        <Name isFirst={isFirst}>{name}</Name>
-        <Score isFirst={isFirst}>{score}점</Score>
-      </StyledResultPlyaer>
-    </StyledResultFirstPlyaer>
+    <StyledResultPlyaer isMe={isMe} isFirst={isFirst}>
+      <Ranking isFirst={isFirst}>{ranking}등</Ranking>
+      <Name isFirst={isFirst}>
+        {isFirst && <FirstIcon />}
+        {name}
+        {isFirst && <FirstIcon />}
+      </Name>
+      <Score isFirst={isFirst}>{score}점</Score>
+    </StyledResultPlyaer>
   );
 };
 
 export default ResultPlayer;
 
-const StyledResultPlyaer = styled.div<{ isMe: boolean }>`
+const StyledResultPlyaer = styled.div<{ isMe: boolean; isFirst: boolean }>`
   display: flex;
-  flex-grow: 1;
-  color: ${(props) => (props.isMe === true ? "#fe4949" : "none")};
-  border-radius: inherit;
-`;
+  color: ${(props) => (props.isMe === true ? "#702770" : "none")};
 
-const StyledResultFirstPlyaer = styled.div<{ isFirst: boolean }>`
-  display: flex;
-  flex-grow: 1;
-  background-color: ${(props) => (props.isFirst === true ? "#e1e951" : "none")};
-  border-radius: inherit;
+  margin-bottom: 30px;
+
+  justify-content: space-between;
 `;
 
 const Ranking = styled.div<{ isFirst: boolean }>`
-  margin-top: 2%;
-  margin-bottom: 2%;
-  margin-right: auto;
-  margin-left: 2%;
-  font-weight: ${(props) => (props.isFirst === true ? "1000" : "500")};
+  margin-left: 20px;
+  font-weight: ${(props) => (props.isFirst === true ? "700" : "inherit")};
 `;
 
 const Name = styled.div<{ isFirst: boolean }>`
-  margin: 2% auto;
-  font-weight: ${(props) => (props.isFirst === true ? "1000" : "500")};
+  font-weight: ${(props) => (props.isFirst === true ? "700" : "inherit")};
 `;
 
 const Score = styled.div<{ isFirst: boolean }>`
-  margin-top: 2%;
-  margin-bottom: 2%;
-  margin-left: auto;
-  margin-right: 2%;
-  font-weight: ${(props) => (props.isFirst === true ? "1000" : "500")};
+  margin-right: 20px;
+  font-weight: ${(props) => (props.isFirst === true ? "700" : "inherit")};
+`;
+
+const FirstIcon = styled(TfiCrown)`
+  color: red;
+  margin-left: 5px;
+  margin-right: 5px;
+  transform: translateY(-2px);
 `;
