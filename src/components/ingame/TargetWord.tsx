@@ -28,7 +28,7 @@ const CharBlock = styled.div`
 
   margin-right: 6px;
 
-  background-color: rgb(128, 0, 128, 0.8);
+  background-color: rgba(128, 0, 128, 0.8);
   color: white;
 
   height: 50px;
