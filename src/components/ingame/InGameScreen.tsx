@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import { useSendMessage } from "@/communicator";
 import { chatAtom } from "@/states/chat";
 import { deadlineAtom, lastWordAtom, turnTimeStampAtom } from "@/states/game";
+import { glassCardStyle } from "@/styles/glass";
 
 import Screen from "../common/Screen";
 import InGameChatPlayer from "./InGameChatPlayer";
@@ -42,59 +43,107 @@ const InGameScreen: FC = () => {
   };
 
   return (
-    <Screen>
-      Game
-      <TimeBar deadline={deadLineTime} turnTimestamp={turnTimestamp} />
-      <PlayersBoxDown>
-        <PlayersBox>
-          <InGamePlayerList />
-        </PlayersBox>
-      </PlayersBoxDown>
-      <LastWordDesign>{LastWord}</LastWordDesign>
-      <GameInformation>제한 시간 안에 단어를 입력해주세요.</GameInformation>
-      <ChatBoxPadding>
-        <ChatBox>
-          {InGameChat.map((chat, idx) => {
-            if (chat.type === "system") {
-              const { content, level } = chat;
-              return (
-                <InGameChatSystem level={level} content={content} key={idx} />
-              );
-            } else {
-              const { content, nickname } = chat;
-              return (
-                <InGameChatPlayer
-                  nickname={nickname}
-                  content={content}
-                  key={idx}
-                />
-              );
-            }
-          })}
-        </ChatBox>
+    <StyledInGameScreen>
+      <LeftSide>
+        <GameCard>
+          Game
+          <TimeBar deadline={deadLineTime} turnTimestamp={turnTimestamp} />
+          <LastWordDesign>{LastWord}</LastWordDesign>
+          <GameInformation>제한 시간 안에 단어를 입력해주세요.</GameInformation>
+        </GameCard>
+        <PlayerCard>
+          <PlayersBoxDown>
+            <PlayersBox>
+              <InGamePlayerList />
+            </PlayersBox>
+          </PlayersBoxDown>
+        </PlayerCard>
+      </LeftSide>
 
-        <InputBox>
-          <ChatInput
-            placeholder="메시지를 입력하세요"
-            onChange={onChange}
-            value={text}
-            ref={inputRef}
-            onKeyPress={handleKeyPress}
-          />
-          <ChatInputButton onClick={sendMessage}>전송</ChatInputButton>
-        </InputBox>
-      </ChatBoxPadding>
-      <FullTimeBar></FullTimeBar>
-      <GameTimeLimit></GameTimeLimit>
-    </Screen>
+      <RightSide>
+        <ChatCard>
+          <ChatArea>
+            {InGameChat.map((chat, idx) => {
+              if (chat.type === "system") {
+                const { content, level } = chat;
+                return (
+                  <InGameChatSystem level={level} content={content} key={idx} />
+                );
+              } else {
+                const { content, nickname } = chat;
+                return (
+                  <InGameChatPlayer
+                    nickname={nickname}
+                    content={content}
+                    key={idx}
+                  />
+                );
+              }
+            })}
+          </ChatArea>
+
+          <InputBox>
+            <ChatInput
+              placeholder="메시지를 입력하세요"
+              onChange={onChange}
+              value={text}
+              ref={inputRef}
+              onKeyPress={handleKeyPress}
+            />
+            <ChatInputButton onClick={sendMessage}>전송</ChatInputButton>
+          </InputBox>
+        </ChatCard>
+      </RightSide>
+    </StyledInGameScreen>
   );
 };
 
 export default InGameScreen;
 
+const StyledInGameScreen = styled(Screen)`
+  display: flex;
+
+  padding: 8% 10%;
+`;
+
+const LeftSide = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 500px;
+`;
+
+const RightSide = styled.div`
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+`;
+
+const GameCard = styled.div`
+  ${glassCardStyle}
+
+  flex-grow: 1;
+`;
+
+const PlayerCard = styled.div`
+  ${glassCardStyle}
+
+  margin-top: 10px;
+`;
+
+const ChatCard = styled.div`
+  ${glassCardStyle}
+
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
 const PlayersBox = styled.div`
   display: flex;
-  margin-top: 95%;
   flex-direction: row;
   justify-content: space-around;
 `;
@@ -103,24 +152,13 @@ const PlayersBoxDown = styled.div`
   display: flex;
 `;
 
-const ChatBoxPadding = styled.div`
-  display: flex;
-  margin-top: 5%;
-  margin-right: 5%;
-  flex-direction: column;
-  align-items: flex-end;
-`;
-
 const InputBox = styled.div`
-  margin-top: 3%;
   display: flex;
 `;
 
-const ChatBox = styled.div`
+const ChatArea = styled.div`
   background: #eaeaea;
   border-radius: 24px;
-  width: 400px;
-  height: 600px;
   padding: 10px;
   overflow-y: auto;
   display: flex;
@@ -131,8 +169,6 @@ const ChatBox = styled.div`
 const ChatInput = styled.input`
   background: #eaeaea;
   border-radius: 24px;
-  width: 300px;
-  height: 50px;
   display: flex;
   flex-wrap: nowrap;
 `;
@@ -140,8 +176,6 @@ const ChatInput = styled.input`
 const ChatInputButton = styled.button`
   background: #eaeaea;
   border-radius: 24px;
-  width: 100px;
-  height: 50px;
   font-size: 130%;
   font-weight: bold;
   flex-wrap: nowrap;
@@ -149,7 +183,6 @@ const ChatInputButton = styled.button`
   align-items: center;
   display: flex;
 `;
-const GameTimeLimit = styled.div``;
 
 const LastWordDesign = styled.div`
   display: flex;
@@ -158,5 +191,3 @@ const LastWordDesign = styled.div`
 const GameInformation = styled.div`
   display: flex;
 `;
-
-const FullTimeBar = styled.div``;
