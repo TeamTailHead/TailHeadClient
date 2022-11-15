@@ -1,7 +1,4 @@
-import {
-  ClientCommunicator,
-  StringClientCommunicator,
-} from "@tailhead/communicator";
+import { ClientCommunicator } from "@tailhead/communicator";
 import { ServerMessageHandler } from "@tailhead/communicator/dist/communicator/types";
 import { ServerMessage } from "@tailhead/communicator/dist/message";
 import { createContext, FC, ReactNode, useContext, useMemo } from "react";
@@ -27,16 +24,16 @@ export const CommunicatorContext = createContext<CommunicatorContextValue>(
 
 interface CommunicatorProviderProps {
   children: ReactNode;
+  communicator: ClientCommunicator;
 }
 
 export const CommunicatorProvider: FC<CommunicatorProviderProps> = ({
   children,
+  communicator,
 }) => {
   const socket = useContext(SocketContext);
 
   const context = useMemo<CommunicatorContextValue>(() => {
-    const communicator = new StringClientCommunicator(socket);
-
     let onDebugSend: ClientCommunicator["send"] = () => {
       //
     };

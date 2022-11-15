@@ -1,26 +1,22 @@
 import styled from "@emotion/styled";
 import { FC, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
-import { useSendMessage } from "@/communicator";
+import { useConnection } from "@/communicator/context/connection";
 import { joinStatusAtom } from "@/states/join";
 import { glassCardStyle, primaryGlassButtonColorStyle } from "@/styles/glass";
 
 import Screen from "../common/Screen";
 
 const JoinScreen: FC = () => {
-  const send = useSendMessage();
-  const [joinStatus, setJoinStatus] = useRecoilState(joinStatusAtom);
+  const connection = useConnection();
+
+  const joinStatus = useRecoilValue(joinStatusAtom);
 
   const [nickname, setNickname] = useState("");
 
-  const handleJoin = () => {
-    setJoinStatus({
-      state: "loading",
-    });
-    send("join", {
-      nickname,
-    });
+  const handleJoin = async () => {
+    await connection.join(nickname);
   };
 
   return (
