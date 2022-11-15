@@ -13,8 +13,13 @@ const ChatSystem: FC<LobbyChatSystemProps> = ({ level, content }) => {
 export default ChatSystem;
 
 const ChatSystemStyle = styled.div<{ level: string }>`
+  background-color: rgb(244, 244, 244);
   color: ${(props) => getColorByLevel(props.level)};
-  font-weight: 600;
+
+  border-radius: 8px;
+  padding: 5px 8px;
+  font-weight: 500;
+  font-size: 16px;
   margin-bottom: 10px;
 `;
 
