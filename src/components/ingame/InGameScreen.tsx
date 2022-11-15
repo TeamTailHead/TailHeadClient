@@ -10,10 +10,10 @@ import Screen from "../common/Screen";
 import InGamePlayerList from "./InGamePlayerList";
 import TargetWord from "./TargetWord";
 import TimeBar from "./TimeBar";
+import TimeNumber from "./TimeNumber";
 
 const InGameScreen: FC = () => {
   const lastWord = useRecoilValue(lastWordAtom);
-  // const DeadLine = useRecoilValue(deadlineAtom);
   const turnTimestamp = useRecoilValue(turnTimeStampAtom);
   const deadLineTime = useRecoilValue(deadlineAtom);
 
@@ -21,8 +21,14 @@ const InGameScreen: FC = () => {
     <StyledInGameScreen>
       <LeftSide>
         <GameCard>
-          <TimeBar deadline={deadLineTime} turnTimestamp={turnTimestamp} />
-          <TargetWord word={lastWord} />
+          <TargetWordBox>
+            <TargetWord word={lastWord} />
+          </TargetWordBox>
+          <StyledTimeBar
+            deadline={deadLineTime}
+            turnTimestamp={turnTimestamp}
+          />
+          <TimeNumber deadline={deadLineTime} turnTimestamp={turnTimestamp} />
         </GameCard>
         <PlayerCard>
           <PlayersBoxDown>
@@ -69,8 +75,21 @@ const GameCard = styled.div`
 
   flex-grow: 1;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledTimeBar = styled(TimeBar)`
+  margin: 20px 20px 10px 20px;
+  align-self: stretch;
+`;
+
+const TargetWordBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const PlayerCard = styled.div`
