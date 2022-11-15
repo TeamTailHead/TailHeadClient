@@ -8,18 +8,18 @@ interface LobbyChatPlayerProps {
   content: string;
 }
 
-const LobbyChatPlayer: FC<LobbyChatPlayerProps> = ({ nickname, content }) => {
+const ChatPlayer: FC<LobbyChatPlayerProps> = ({ nickname, content }) => {
   return (
-    <LobbyChatPlayerStyle>
+    <StyledChatPlayer>
       <Nickname>{nickname}</Nickname>
       <Content>{content}</Content>
-    </LobbyChatPlayerStyle>
+    </StyledChatPlayer>
   );
 };
 
-export default LobbyChatPlayer;
+export default ChatPlayer;
 
-const LobbyChatPlayerStyle = styled.div`
+const StyledChatPlayer = styled.div`
   margin-bottom: 10px;
   align-self: flex-start;
 `;

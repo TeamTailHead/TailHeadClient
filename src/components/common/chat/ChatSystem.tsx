@@ -6,13 +6,13 @@ interface LobbyChatSystemProps {
   content: string;
 }
 
-const LobbyChatSystem: FC<LobbyChatSystemProps> = ({ level, content }) => {
-  return <LobbyChatSystemStyle level={level}>{content}</LobbyChatSystemStyle>;
+const ChatSystem: FC<LobbyChatSystemProps> = ({ level, content }) => {
+  return <ChatSystemStyle level={level}>{content}</ChatSystemStyle>;
 };
 
-export default LobbyChatSystem;
+export default ChatSystem;
 
-const LobbyChatSystemStyle = styled.div<{ level: string }>`
+const ChatSystemStyle = styled.div<{ level: string }>`
   color: ${(props) => getColorByLevel(props.level)};
   font-weight: 600;
   margin-bottom: 10px;

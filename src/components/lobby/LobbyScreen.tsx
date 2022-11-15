@@ -12,8 +12,8 @@ import {
   primaryGlassButtonColorStyle,
 } from "@/styles/glass";
 
+import ChatList from "../common/chat/ChatList";
 import Screen from "../common/Screen";
-import LobbyChatList from "./LobbyChatList";
 import PlayerList from "./PlayerList";
 
 const LobbyScreen: FC = () => {
@@ -42,7 +42,7 @@ const LobbyScreen: FC = () => {
               </StartButton>
             )}
           </PlayerListCard>
-          <LobbyChatList />
+          <ChatList />
         </LobbyUpperBox>
       </LobbyScreenBox>
     </Screen>
