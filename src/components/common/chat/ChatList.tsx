@@ -106,7 +106,6 @@ const StyledChatList = styled.div`
 
 const InputBox = styled.div`
   display: flex;
-  width: 100%;
   margin-top: 8px;
 `;
 
@@ -138,7 +137,6 @@ const ChatInputButton = styled.button`
   display: flex;
   font-weight: bold;
 
-  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
 `;
