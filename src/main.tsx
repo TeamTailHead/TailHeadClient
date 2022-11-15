@@ -5,9 +5,8 @@ import { RecoilRoot } from "recoil";
 import App from "./App";
 import { CommunicatorProvider } from "./communicator/context/communicator";
 import { ConnectionProvider } from "./communicator/context/connection";
-import SocketProvider from "./communicator/context/socket";
-import { createDebugSocket } from "./communicator/socket/debugSocket";
-import { createNodeSocket } from "./communicator/socket/nodeSocket";
+import { createIpcCommunicator } from "./communicator/ipcCommunicator";
+import { createMockCommunicator } from "./communicator/mockCommunicator";
 import { parseConnectionURL } from "./communicator/util";
 import { CommunicatorWorker } from "./components/worker";
 import { SOCKET_SERVER_URL, USE_DEBUG_SOCKET } from "./const";
@@ -18,33 +17,28 @@ if (!root) {
   throw new Error("root element not found");
 }
 
-const socketFactory = () => {
+const communicatorFactory = () => {
   if (USE_DEBUG_SOCKET) {
-    return createDebugSocket();
+    return createMockCommunicator();
   }
 
   const { host, port } = parseConnectionURL(SOCKET_SERVER_URL);
 
-  return createNodeSocket({
-    host: host,
-    port: port,
-  });
+  return createIpcCommunicator(host, port);
 };
 
-const { socket, connection } = socketFactory();
+const { communicator, connection } = communicatorFactory();
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
     <RecoilRoot>
-      <SocketProvider socket={socket}>
-        <CommunicatorProvider>
-          <ConnectionProvider connection={connection}>
-            <App />
-            <CommunicatorWorker />
-            <Debug />
-          </ConnectionProvider>
-        </CommunicatorProvider>
-      </SocketProvider>
+      <CommunicatorProvider communicator={communicator}>
+        <ConnectionProvider connection={connection}>
+          <App />
+          <CommunicatorWorker />
+          <Debug />
+        </ConnectionProvider>
+      </CommunicatorProvider>
     </RecoilRoot>
   </React.StrictMode>
 );

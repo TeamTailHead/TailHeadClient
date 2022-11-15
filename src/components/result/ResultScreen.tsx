@@ -49,39 +49,50 @@ const ResultScreen: FC = () => {
 export default ResultScreen;
 
 const StyledResultScreen = styled(Screen)`
-  text-align: center;
-  background-color: #e5e5e5;
+  display: flex;
+  flex-direction: column;
+
+  overflow: auto;
+  width: 100vw;
+  height: 100vh;
 `;
 
 const ResultScreenTitle = styled.div`
-  font-size: 300%;
-  margin: 0 auto 5%;
-  width: 200px;
-  background-color: #b3b3b3;
-  border-radius: 14px;
+  display: flex;
+  border-radius: 24px;
+  border: 2px solid black;
+
+  justify-content: center;
+  margin: 5vh auto;
+  width: 20vw;
+
+  font-size: 4vw;
+  background-color: #d7e6ff;
+  color: black;
 `;
 
 const ResultScreenMain = styled.div`
-  background-color: #b3b3b3;
-  margin-left: 20%;
-  margin-right: 20%;
+  border: 2px solid black;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  margin-bottom: 5vh;
   border-radius: 24px;
+  background-color: #d7e6ff;
+  color: black;
 `;
 
 const ResultLobbyButton = styled.button`
-  display: flex;
-  width: 100px;
-  height: 50px;
-  flex-wrap: wrap;
-  align-content: space-around;
-  justify-content: center;
-  background: #f3f3f3;
-  color: #868686;
-  font-size: 120%;
+  width: 8vw;
+  height: 5vh;
+
+  background-color: #d7e6ff;
+  color: black;
+  font-size: 1.5vw;
   font-weight: bold;
   border-radius: 24px;
 
+  border: 2px solid black;
   position: fixed;
-  right: 0;
-  top: 0;
+  right: 3vw;
+  top: 5vh;
 `;

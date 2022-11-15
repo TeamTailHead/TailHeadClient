@@ -1,5 +1,8 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { FC } from "react";
+import { FaCrown } from "react-icons/fa";
+import { MdPerson } from "react-icons/md";
 
 interface PlayerListItemProps {
   nickname: string;
@@ -14,9 +17,11 @@ const PlayerListItem: FC<PlayerListItemProps> = ({
 }) => {
   return (
     <StyledPlayerListItem>
+      <PersonIcon isMe={isMe} />
       <Name isAdmin={isAdmin} isMe={isMe}>
         {name}
       </Name>
+      {isAdmin && <AdminIcon />}
     </StyledPlayerListItem>
   );
 };
@@ -24,13 +29,43 @@ const PlayerListItem: FC<PlayerListItemProps> = ({
 export default PlayerListItem;
 
 const StyledPlayerListItem = styled.div`
+  margin-left: 10px;
+  margin-bottom: 10px;
   display: flex;
-  margin-left: 1vw;
-  margin-bottom: 2vh;
+  align-items: center;
+`;
+
+const PersonIcon = styled(MdPerson)<{ isMe: boolean }>`
+  ${(props) =>
+    props.isMe
+      ? css`
+          color: #7e107e;
+        `
+      : css`
+          color: black;
+        `}
+
+  margin-right: 5px;
+  height: 20px;
+`;
+
+const AdminIcon = styled(FaCrown)`
+  color: #f2f200;
+  margin-left: 5px;
+  transform: translateY(-2px);
 `;
 
 const Name = styled.div<{ isAdmin: boolean; isMe: boolean }>`
-  font-weight: ${(props) => (props.isAdmin === true ? "bold" : "normal")};
-  font-size: inherit;
-  color: ${(props) => (props.isMe === true ? "blue" : "black")};
+  font-size: 18px;
+
+  ${(props) =>
+    props.isMe
+      ? css`
+          font-weight: 500;
+          color: #702770;
+        `
+      : css`
+          font-weight: 400;
+          color: black;
+        `};
 `;

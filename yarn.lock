@@ -1356,10 +1356,10 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@tailhead/communicator@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@tailhead/communicator/-/communicator-0.0.3.tgz#377b4fa4cbed359d1f3ca64e45254e0069183f17"
-  integrity sha512-8UL68uK+SNnaeSd6nvtHOqmUlHDbYSQt5UFCl9b7LFdtuBjxh+08qVhsMT+52F1tKwOgQa8kVFnPlHD2EKuM8g==
+"@tailhead/communicator@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@tailhead/communicator/-/communicator-0.1.1.tgz#f857bf6e5458b08609cbf21b00e803b7a7dad411"
+  integrity sha512-+r4DhqKF8PdJvasTnORttsiLWqyzNKOWQvmJckYI/xf2+xmc5bjPdDxdYX2RpVzZGu/DSF5LcBL3Gv4U0QHKQQ==
   dependencies:
     nanoid "^3.0.0"
 
@@ -4590,6 +4590,11 @@ react-hook-form@^7.37.0:
   version "7.37.0"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.37.0.tgz#4d1738f092d3d8a3ade34ee892d97350b1032b19"
   integrity sha512-6NFTxsnw+EXSpNNvLr5nFMjPdYKRryQcelTHg7zwBB6vAzfPIcZq4AExP4heVlwdzntepQgwiOQW4z7Mr99Lsg==
+
+react-icons@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.6.0.tgz#f83eda179af5d02c047449a20b702c858653d397"
+  integrity sha512-rR/L9m9340yO8yv1QT1QurxWQvWpbNHqVX0fzMln2HEb9TEIrQRGsqiNFQfiv9/JEUbyHmHPlNTB2LWm2Ttz0g==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"

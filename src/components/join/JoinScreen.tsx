@@ -1,25 +1,22 @@
 import styled from "@emotion/styled";
 import { FC, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
-import { useSendMessage } from "@/communicator";
+import { useConnection } from "@/communicator/context/connection";
 import { joinStatusAtom } from "@/states/join";
+import { glassCardStyle, primaryGlassButtonColorStyle } from "@/styles/glass";
 
 import Screen from "../common/Screen";
 
 const JoinScreen: FC = () => {
-  const send = useSendMessage();
-  const [joinStatus, setJoinStatus] = useRecoilState(joinStatusAtom);
+  const connection = useConnection();
+
+  const joinStatus = useRecoilValue(joinStatusAtom);
 
   const [nickname, setNickname] = useState("");
 
-  const handleJoin = () => {
-    setJoinStatus({
-      state: "loading",
-    });
-    send("join", {
-      nickname,
-    });
+  const handleJoin = async () => {
+    await connection.join(nickname);
   };
 
   return (
@@ -36,7 +33,7 @@ const JoinScreen: FC = () => {
             onClick={handleJoin}
             disabled={joinStatus.state === "loading"}
           >
-            시작하기
+            접속하기
           </JoinButton>
         </NicknameForm>
         {joinStatus.state === "error" ? (
@@ -55,10 +52,13 @@ const StyledScreen = styled(Screen)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  color: #000000;
 `;
 
 const CenterBox = styled.div`
-  background-color: #ebebeb;
+  ${glassCardStyle}
+
   width: 400px;
   padding: 20px 20px;
 `;
@@ -66,7 +66,7 @@ const CenterBox = styled.div`
 const Title = styled.h2`
   text-align: center;
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 500;
 `;
 
 const NicknameForm = styled.div`
@@ -75,21 +75,28 @@ const NicknameForm = styled.div`
 `;
 
 const NicknameInput = styled.input`
-  border: 1px solid grey;
   flex-grow: 1;
-  padding: 0 10px;
-  border-radius: 5px;
+  padding: 10px 15px;
+  border: none;
+  background: rgba(164, 164, 164, 0.23);
+  border-radius: 10px;
+  transition: background-color 0.3s;
+
+  &:focus,
+  &:hover {
+    background: rgba(109, 109, 109, 0.23);
+  }
 `;
 
 const JoinButton = styled.button`
-  background-color: #9bcdff;
-  margin-left: 5px;
-  padding: 5px 10px;
+  margin-left: 10px;
+  padding: 5px 15px;
   border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s;
+  cursor: pointer;
 
-  &:hover {
-    background-color: #89c4ff;
-  }
+  ${primaryGlassButtonColorStyle}
 `;
 
 const JoinErrorMessage = styled.p`
