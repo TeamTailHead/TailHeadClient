@@ -11,6 +11,7 @@ import { useRecoilValue } from "recoil";
 
 import { useSendMessage } from "@/communicator";
 import { chatAtom } from "@/states/chat";
+import { currentPlayerAtom } from "@/states/currentPlayer";
 import {
   glassButtonStyle,
   glassCardStyle,
@@ -18,10 +19,12 @@ import {
 } from "@/styles/glass";
 
 import LobbyChatPlayer from "./LobbyChatPlayer";
+import LobbyChatSelf from "./LobbyChatSelf";
 import LobbyChatSystem from "./LobbyChatSystem";
 
-const LobbyChat: FC = () => {
+const LobbyChatList: FC = () => {
   const lobbyChat = useRecoilValue(chatAtom);
+  const currentPlayer = useRecoilValue(currentPlayerAtom);
 
   const send = useSendMessage();
 
@@ -56,7 +59,7 @@ const LobbyChat: FC = () => {
   }, [lobbyChat]);
 
   return (
-    <StyledLobbyChat>
+    <StyledLobbyChatList>
       <ChatArea>
         {lobbyChat.map((chat, idx) => {
           if (chat.type === "system") {
@@ -64,16 +67,17 @@ const LobbyChat: FC = () => {
             return (
               <LobbyChatSystem level={level} content={content} key={idx} />
             );
-          } else {
-            const { content, nickname } = chat;
-            return (
-              <LobbyChatPlayer
-                nickname={nickname}
-                content={content}
-                key={idx}
-              />
-            );
           }
+
+          if (chat.playerId === currentPlayer.id) {
+            const { content } = chat;
+            return <LobbyChatSelf content={content} key={idx} />;
+          }
+
+          const { content, nickname } = chat;
+          return (
+            <LobbyChatPlayer nickname={nickname} content={content} key={idx} />
+          );
         })}
         <div ref={chatEndRef} />
       </ChatArea>
@@ -87,13 +91,13 @@ const LobbyChat: FC = () => {
         />
         <ChatInputButton onClick={sendMessage}>전송</ChatInputButton>
       </InputBox>
-    </StyledLobbyChat>
+    </StyledLobbyChatList>
   );
 };
 
-export default LobbyChat;
+export default LobbyChatList;
 
-const StyledLobbyChat = styled.div`
+const StyledLobbyChatList = styled.div`
   ${glassCardStyle}
 
   display: flex;
