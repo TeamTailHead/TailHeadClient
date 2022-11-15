@@ -136,6 +136,7 @@ const ChatInputButton = styled.button`
   margin-left: 5px;
   display: flex;
   font-weight: bold;
+  min-width: 60px;
 
   justify-content: center;
   align-items: center;
