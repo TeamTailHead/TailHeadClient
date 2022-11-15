@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, theme } from "@chakra-ui/react";
 import { FC, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 
@@ -7,15 +7,19 @@ import { useCommunicatorDebugger } from "@/communicator";
 import { receivedMessageAtom, sendedMessageAtom } from "../states";
 import DebugView from "./DebugView";
 
+delete theme.styles.global;
+
 const Debug: FC = () => {
   if (!import.meta.env.DEV) {
     return null;
   }
 
   return (
-    <ChakraProvider resetCSS={false}>
-      <DebugView />
-      <DebugWorker />
+    <ChakraProvider resetCSS={false} theme={theme} cssVarsRoot="#chakraRoot">
+      <div id="chakraRoot">
+        <DebugView />
+        <DebugWorker />
+      </div>
     </ChakraProvider>
   );
 };
