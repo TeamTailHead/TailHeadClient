@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { FC } from "react";
-import { TfiCrown } from "react-icons/Tfi";
+import { TfiCrown } from "react-icons/tfi";
 
 interface ResultPlayerProps {
   nickname: string;
