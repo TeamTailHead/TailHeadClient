@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import ScreenSelector from "./components/common/ScreenSelector";
 import ConnectionStatus from "./components/connection/ConnectionStatus";
+import InGameScreen from "./components/ingame/InGameScreen";
 import JoinScreen from "./components/join/JoinScreen";
 import LobbyScreen from "./components/lobby/LobbyScreen";
 import ResultScreen from "./components/result/ResultScreen";
@@ -14,6 +15,7 @@ const screens: Array<{ key: ScreenState; component: ReactElement }> = [
   { key: "join", component: <JoinScreen /> },
   { key: "lobby", component: <LobbyScreen /> },
   { key: "result", component: <ResultScreen /> },
+  { key: "game", component: <InGameScreen /> },
 ];
 
 const App: React.FC = () => {
