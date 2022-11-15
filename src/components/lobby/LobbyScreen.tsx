@@ -13,7 +13,7 @@ import {
 } from "@/styles/glass";
 
 import Screen from "../common/Screen";
-import LobbyChat from "./LobbyChat";
+import LobbyChatList from "./LobbyChatList";
 import PlayerList from "./PlayerList";
 
 const LobbyScreen: FC = () => {
@@ -42,7 +42,7 @@ const LobbyScreen: FC = () => {
               </StartButton>
             )}
           </PlayerListCard>
-          <LobbyChat />
+          <LobbyChatList />
         </LobbyUpperBox>
       </LobbyScreenBox>
     </Screen>

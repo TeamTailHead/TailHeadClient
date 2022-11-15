@@ -24,6 +24,12 @@ export const glassInputStyle = css`
   }
 `;
 
+export const glassOverlayStyle = css`
+  background-color: rgba(88, 88, 88, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+`;
+
 export const glassButtonStyle = css`
   border: none;
   background: rgba(164, 164, 164, 0.23);
