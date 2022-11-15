@@ -59,14 +59,16 @@ const RightSide = styled.div`
   flex-grow: 1;
 
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
   margin-left: 10px;
+  height: 100%;
 `;
 
 const GameCard = styled.div`
   ${glassCardStyle}
 
   flex-grow: 1;
+  flex-direction: column;
 `;
 
 const PlayerCard = styled.div`
