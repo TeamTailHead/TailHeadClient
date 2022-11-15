@@ -7,6 +7,11 @@ import { currentPlayerAtom } from "@/states/currentPlayer";
 import { resultAtom } from "@/states/result";
 import { GameResult } from "@/states/result";
 import { screenStateAtom } from "@/states/screen";
+import {
+  glassButtonStyle,
+  glassCardStyle,
+  primaryGlassButtonColorStyle,
+} from "@/styles/glass";
 
 import Screen from "../common/Screen";
 import ResultPlayer from "./ResultPlayser";
@@ -28,20 +33,24 @@ const ResultScreen: FC = () => {
 
   return (
     <StyledResultScreen>
-      <ResultScreenTitle>순위표</ResultScreenTitle>
-      <ResultLobbyButton onClick={toLobby}>로비로</ResultLobbyButton>
-      <ResultScreenMain>
-        {sorted.map((user, idx) => (
-          <ResultPlayer
-            key={user.id}
-            ranking={idx + 1}
-            nickname={user.nickname}
-            score={user.score}
-            isFirst={idx === 0}
-            isMe={currentPlayerId === user.id}
-          />
-        ))}
-      </ResultScreenMain>
+      <StyledResultBox>
+        <ResultScreenTitle>순위표</ResultScreenTitle>
+
+        <ResultScreenMain>
+          {sorted.map((user, idx) => (
+            <ResultPlayer
+              key={user.id}
+              ranking={idx + 1}
+              nickname={user.nickname}
+              score={user.score}
+              isFirst={idx === 0}
+              isMe={currentPlayerId === user.id}
+            />
+          ))}
+        </ResultScreenMain>
+
+        <ResultLobbyButton onClick={toLobby}>로비</ResultLobbyButton>
+      </StyledResultBox>
     </StyledResultScreen>
   );
 };
@@ -51,48 +60,33 @@ export default ResultScreen;
 const StyledResultScreen = styled(Screen)`
   display: flex;
   flex-direction: column;
-
   overflow: auto;
-  width: 100vw;
-  height: 100vh;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledResultBox = styled.div`
+  ${glassCardStyle}
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 `;
 
 const ResultScreenTitle = styled.div`
-  display: flex;
-  border-radius: 24px;
-  border: 2px solid black;
-
-  justify-content: center;
-  margin: 5vh auto;
-  width: 20vw;
-
-  font-size: 4vw;
-  background-color: #d7e6ff;
-  color: black;
+  text-align: center;
+  font-size: 35px;
+  margin-top: 10px;
+  margin-bottom: 30px;
 `;
 
 const ResultScreenMain = styled.div`
-  border: 2px solid black;
-  margin-left: 20vw;
-  margin-right: 20vw;
-  margin-bottom: 5vh;
-  border-radius: 24px;
-  background-color: #d7e6ff;
-  color: black;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
 `;
 
 const ResultLobbyButton = styled.button`
-  width: 8vw;
-  height: 5vh;
-
-  background-color: #d7e6ff;
-  color: black;
-  font-size: 1.5vw;
-  font-weight: bold;
-  border-radius: 24px;
-
-  border: 2px solid black;
-  position: fixed;
-  right: 3vw;
-  top: 5vh;
+  ${glassButtonStyle}
+  ${primaryGlassButtonColorStyle}
+  padding: 15px;
 `;
