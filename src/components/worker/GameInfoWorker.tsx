@@ -8,6 +8,7 @@ import {
   lastWordAtom,
   thisTurnPlayerIdAtom,
   turnSequenceAtom,
+  turnTimeStampAtom,
 } from "@/states/game";
 import { screenStateAtom } from "@/states/screen";
 
@@ -19,6 +20,7 @@ const GameInfoWorker: FC = () => {
   const setLastWord = useSetRecoilState(lastWordAtom);
   const setDeadLine = useSetRecoilState(deadlineAtom);
   const setTurnSequence = useSetRecoilState(turnSequenceAtom);
+  const setTurnTimestamp = useSetRecoilState(turnTimeStampAtom);
 
   useEffect(() => {
     setHandler(
@@ -36,6 +38,7 @@ const GameInfoWorker: FC = () => {
           }))
         );
         setScreenState("game");
+        setTurnTimestamp(new Date());
       }
     );
   }, []);

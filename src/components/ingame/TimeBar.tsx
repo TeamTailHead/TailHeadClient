@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { differenceInSeconds } from "date-fns";
+import { differenceInMilliseconds } from "date-fns";
 import { FC, useEffect, useRef } from "react";
 
 interface TimeBarProps {
@@ -9,14 +9,15 @@ interface TimeBarProps {
 }
 
 const TimeBar: FC<TimeBarProps> = ({ className, deadline, turnTimestamp }) => {
-  const totalSeconds = differenceInSeconds(deadline, turnTimestamp);
+  const totalMilliseconds = differenceInMilliseconds(deadline, turnTimestamp);
 
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const process = () => {
-      const remainingSeconds = differenceInSeconds(deadline, new Date());
-      const percentage = (remainingSeconds * 100) / totalSeconds;
+      const now = new Date();
+      const remainingMilliseconds = differenceInMilliseconds(deadline, now);
+      const percentage = (remainingMilliseconds * 100) / totalMilliseconds;
       if (ref.current) {
         ref.current.style.width = `${percentage}%`;
       }
