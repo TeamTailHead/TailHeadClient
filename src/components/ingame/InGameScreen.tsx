@@ -2,7 +2,12 @@ import styled from "@emotion/styled";
 import { FC } from "react";
 import { useRecoilValue } from "recoil";
 
-import { deadlineAtom, lastWordAtom, turnTimeStampAtom } from "@/states/game";
+import {
+  deadlineAtom,
+  isMyTurnSelector,
+  lastWordAtom,
+  turnTimeStampAtom,
+} from "@/states/game";
 import { glassCardStyle } from "@/styles/glass";
 
 import ChatList from "../common/chat/ChatList";
@@ -16,13 +21,14 @@ const InGameScreen: FC = () => {
   const lastWord = useRecoilValue(lastWordAtom);
   const turnTimestamp = useRecoilValue(turnTimeStampAtom);
   const deadLineTime = useRecoilValue(deadlineAtom);
+  const isMyTurn = useRecoilValue(isMyTurnSelector);
 
   return (
     <StyledInGameScreen>
       <LeftSide>
         <GameCard>
           <TargetWordBox>
-            <TargetWord word={lastWord} />
+            <TargetWord word={lastWord} highlight={isMyTurn} />
           </TargetWordBox>
           <StyledTimeBar
             deadline={deadLineTime}
