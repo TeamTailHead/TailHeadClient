@@ -1,4 +1,6 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
+
+import { currentPlayerAtom } from "./currentPlayer";
 
 export interface GamePlayer {
   id: string;
@@ -14,6 +16,16 @@ export const gamePlayersAtom = atom<GamePlayer[]>({
 export const thisTurnPlayerIdAtom = atom<string>({
   key: "thisTurnPlayerId",
   default: "",
+});
+
+export const isMyTurnSelector = selector<boolean>({
+  key: "isMyTurn",
+  get({ get }) {
+    const thisTurnPlayerId = get(thisTurnPlayerIdAtom);
+    const currentPlayer = get(currentPlayerAtom);
+
+    return thisTurnPlayerId === currentPlayer.id;
+  },
 });
 
 export const wordHistoryAtom = atom<string[]>({
