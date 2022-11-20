@@ -37,6 +37,7 @@ async function createWindow() {
       nodeIntegration: true,
       contextIsolation: false,
     },
+    autoHideMenuBar: true,
   });
 
   if (app.isPackaged) {
